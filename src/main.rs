@@ -69,7 +69,7 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
 
 #[get("/")]
 fn index() -> &'static str {
-    "\
+"   
     USAGE
     -----
 
