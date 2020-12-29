@@ -3,6 +3,7 @@
 
 extern crate tree_magic;
 
+use std::env;
 use std::io::prelude::*;
 use std::collections::HashMap;
 use std::path::Path;
@@ -23,7 +24,7 @@ fn pretty_retrieve(id: PasteId) -> Option<Template> {
 
     let mut contents = String::new();
     file.read_to_string(&mut contents).unwrap();
-    let theme = String::from(".");
+    let theme = env::var("THEME").unwrap_or(".".to_string());
 
     let mut map = HashMap::new();
     map.insert("title", id.to_string());
@@ -56,8 +57,11 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
     paste.stream_to_file(filepath)?;
 
     let url = match tree_magic::from_filepath(filepath).as_str().contains("text") {
-        true    => format!("{host}/p/{id}\n", host = "http://localhost:8000", id = id),
-        false   => format!("{host}/{id}\n", host = "http://localhost:8000", id = id),
+        true    => format!("https://{host}/p/{id}\n", host = env::var("HOST")
+            .unwrap_or("<no_host_provided>".to_string()), id = id),
+
+        false   => format!("https://{host}/{id}\n", host = env::var("HOST")
+            .unwrap_or("<no_host_provided>".to_string()), id = id)
     };
 
     Ok(url)
