@@ -31,9 +31,9 @@ fn pretty_retrieve(id: PasteId) -> Option<Template> {
     map.insert("code", contents);
     let rendered = Template::render("pretty", &map);
 
-    match tree_magic::from_filepath(filepath).as_str() {
-        "text/plain" => Some(rendered),
-            _   =>    Err("does not have the MIME type of a plaintext file").ok()
+    match tree_magic::from_filepath(filepath).contains("text") {
+        true    =>  Some(rendered),
+        false   =>  None
     }
 }
 
@@ -53,9 +53,9 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
 
     paste.stream_to_file(filepath)?;
 
-    let url = match tree_magic::from_filepath(filepath).as_str() {
-        "text/plain" => format!("{host}/p/{id}\n", host = "http://localhost:8000", id = id),
-            _ => format!("{host}/{id}\n", host = "http://localhost:8000", id = id),
+    let url = match tree_magic::from_filepath(filepath).as_str().contains("text") {
+        true    => format!("{host}/p/{id}\n", host = "http://localhost:8000", id = id),
+        false   => format!("{host}/{id}\n", host = "http://localhost:8000", id = id),
     };
 
     Ok(url)
@@ -64,21 +64,42 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
 #[get("/")]
 fn index() -> &'static str {
     "\
-USAGE
-=====
+    USAGE
+    -----
 
-    POST    / 
+        POST    / 
 
-        accepts raw data in the body of the request and responds with a URL
-        of a page containing the body's content
+            accepts raw data in the body of the request and responds with a URL
+            of a page containing the body's content
 
-    GET     /<id>
+        GET     /<id>
 
-        retrieves the content for the paste with id `<id>`
+            retrieves the content for the paste with id `<id>`
 
-    GET     /p/<id>
+        GET     /p/<id>
 
-        retrieves the content for the paste with id `<id>`, with syntax highlighting
+            retrieves the HTML page with syntax-highlighted content for the paste with id `<id>`
+ 
+    EXAMPLES
+    --------
+
+        Paste a file named 'file.txt' using cURL:
+
+            curl --data-binary @file.txt https://bin.example.com
+
+        Paste from stdin using cURL:
+
+            echo \"Hello, world.\" | curl --data-binary @- https://bin.example.com
+
+        Add this to your .zshrc to implement a quicker usage.
+
+            function paste() {
+              local file=${1:-/dev/stdin}
+              curl --data-binary @${file} https://paste.rs
+            }
+
+        If the uploaded data binary is parsed as \"text/*\", then the paste will be syntax
+        highlighted
     "
 }
 

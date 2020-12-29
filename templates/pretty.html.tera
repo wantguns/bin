@@ -15,7 +15,7 @@
             code {
                 background: #fff;
                 position: fixed;
-                width:100%;
+                width: 100%;
                 bottom: 0;
                 right: 0;
                 left: 0;
