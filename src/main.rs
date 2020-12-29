@@ -8,8 +8,8 @@ use std::collections::HashMap;
 use std::path::Path;
 use std::fs::File;
 
-use rocket::Data;
 use rocket_contrib::templates::Template;
+use rocket::Data;
 
 mod paste_id;
 
@@ -51,6 +51,8 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
     let filename = format!("upload/{id}", id = id);
     let filepath = Path::new(&filename);
 
+    //TODO: Implement limits when this stupid framework starts working
+    //      Look into using open(), take() methods in the Data struct
     paste.stream_to_file(filepath)?;
 
     let url = match tree_magic::from_filepath(filepath).as_str().contains("text") {
@@ -85,17 +87,17 @@ fn index() -> &'static str {
 
         Paste a file named 'file.txt' using cURL:
 
-            curl --data-binary @file.txt https://bin.example.com
+            curl -d@file.txt https://bin.wantguns.dev
 
         Paste from stdin using cURL:
 
-            echo \"Hello, world.\" | curl --data-binary @- https://bin.example.com
+            echo \"Hello, world.\" | curl -d@- https://bin.wantguns.dev
 
         Add this to your .zshrc to implement a quicker usage.
 
             function paste() {
               local file=${1:-/dev/stdin}
-              curl --data-binary @${file} https://paste.rs
+              curl -d@${file} https://bin.wantguns.dev
             }
 
         If the uploaded data binary is parsed as \"text/*\", then the paste will be syntax
