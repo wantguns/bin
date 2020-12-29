@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+        <style>
+
+            /* Use Ayu-Colors by default */
+            .hljs{display:block;overflow-x:auto;background:#191f26;color:#e6e1cf;padding:.5em}.hljs-comment,.hljs-quote{color:#5c6773;font-style:italic}.hljs-attr,.hljs-attribute,.hljs-link,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-template-variable,.hljs-variable{color:#f73}.hljs-builtin-name,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#fe9}.hljs-bullet,.hljs-string{color:#b8cc52}.hljs-built_in,.hljs-section,.hljs-title{color:#ffb454}.hljs-keyword,.hljs-selector-tag,.hljs-symbol{color:#f73}.hljs-name{color:#36a3d9}.hljs-tag{color:#00568d}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-addition{color:#91b362}.hljs-deletion{color:#d96c75}
+        
+            /* fill entire page */
+            code {
+                background: #fff;
+                position: fixed;
+                width:100%;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                top: 0;
+            }
+        </style>
+
+        <!-- Bring your own theme -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/{{ theme }}.min.css">
+
+</head>
+
+
+<body>
+<pre><code>{{ code }}</code></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.1/highlight.min.js"
+        integrity="sha512-DrpaExP2d7RJqNhXB41Q/zzzQrtb6J0zfnXD5XeVEWE8d9Hj54irCLj6dRS3eNepPja7DvKcV+9PnHC7A/g83A=="
+        crossorigin="anonymous"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+</body>
+
+</html>
