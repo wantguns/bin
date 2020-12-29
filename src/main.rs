@@ -1,16 +1,30 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 #[macro_use] extern crate rocket;
 
+extern crate tree_magic;
+
 use std::io;
 use std::path::Path;
 use std::fs::File;
 
 use rocket::Data;
 use rocket::http::RawStr;
+use rocket_contrib::templates::Template;
 
 mod paste_id;
 
 use paste_id::PasteId;
+
+#[get("/p/<id>")]
+fn pretty_retrieve(id: PasteId) -> Option<File> {
+    let filename = format!("upload/{id}", id = id);
+    let filepath = Path::new(&filename);
+
+    match tree_magic::from_filepath(filepath).as_str() {
+        "text/plain" => File::open(&filename).ok(),
+            _   =>    Err("does not have the MIME type of a plaintext file").ok()
+    }
+}
 
 #[get("/<id>")]
 fn retrieve(id: PasteId) -> Option<File> {
@@ -43,11 +57,15 @@ USAGE
     GET     /<id>
 
         retrieves the content for the paste with id `<id>`
+
+    GET     /p/<id>
+
+        retrieves the content for the paste with id `<id>`, with syntax highlighting
     "
 }
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![index, upload, retrieve])
+        .mount("/", routes![index, upload, retrieve, pretty_retrieve])
         .launch();
 }
