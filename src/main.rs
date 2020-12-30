@@ -70,43 +70,43 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
 #[get("/")]
 fn index() -> &'static str {
 "   
-    USAGE
-    -----
+USAGE
+-----
 
-        POST    / 
+    POST    / 
 
-            accepts raw data in the body of the request and responds with a URL
-            of a page containing the body's content
+        accepts raw data in the body of the request and responds with a URL
+        of a page containing the body's content
 
-        GET     /<id>
+    GET     /<id>
 
-            retrieves the content for the paste with id `<id>`
+        retrieves the content for the paste with id `<id>`
 
-        GET     /p/<id>
+    GET     /p/<id>
 
-            retrieves the HTML page with syntax-highlighted content for the paste with id `<id>`
- 
-    EXAMPLES
-    --------
+        retrieves the HTML page with syntax-highlighted content for the paste with id `<id>`
 
-        Paste a file named 'file.txt' using cURL:
+EXAMPLES
+--------
 
-            curl -d@file.txt https://bin.wantguns.dev
+    Paste a file named 'file.txt' using cURL:
 
-        Paste from stdin using cURL:
+        curl --data-binary @file.txt https://bin.wantguns.dev
 
-            echo \"Hello, world.\" | curl -d@- https://bin.wantguns.dev
+    Paste from stdin using cURL:
 
-        Add this to your .zshrc to implement a quicker usage.
+        echo \"Hello, world.\" | curl --data-binary @- https://bin.wantguns.dev
 
-            function paste() {
-              local file=${1:-/dev/stdin}
-              curl -d@${file} https://bin.wantguns.dev
-            }
+    Add this to your .zshrc to implement a quicker usage.
 
-        If the uploaded data binary is parsed as \"text/*\", then the paste will be syntax
-        highlighted
-    "
+        function paste() {
+          local file=${1:-/dev/stdin}
+          curl --data-binary @${file} https://bin.wantguns.dev
+        }
+
+    If the uploaded data binary is parsed as \"text/*\", then the paste will be syntax
+    highlighted
+"
 }
 
 fn main() {
