@@ -60,6 +60,12 @@
                 background: transparent;
             }
 
+            ::selection {
+                /* text selection color
+                   make sure to change to your your preferred color if changing the default colorscheme */
+                background: #253340;
+            }
+
         </style>
 
         <!-- Bring your own theme -->
