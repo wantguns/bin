@@ -7,7 +7,6 @@ services:
       - 127.0.0.1:6162:6162
     environment:
       - ROCKET_PORT=6162  # Port the app uses
-      - THEME=gruvbox-dark  # By default, it uses the Ayu Colorscheme
       - HOST=localhost:6162 # or bin.example.com 
     volumes:
       - ./upload:/app/upload  # upload folder will have your pastes

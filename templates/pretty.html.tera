@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="Author: Gunwant Jain,
+    A highly opinionated, minamalistic Pastebin with no bloat of a database.">
     <title>{{ title }}</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css"> -->
 
     <style>
+            @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@460&display=swap');
 
             /* Use Ayu-Colors by default */
             .hljs{display:block;overflow-x:auto;background:#191f26;color:#e6e1cf;padding:.5em}.hljs-comment,.hljs-quote{color:#5c6773;font-style:italic}.hljs-attr,.hljs-attribute,.hljs-link,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-template-variable,.hljs-variable{color:#f73}.hljs-builtin-name,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#fe9}.hljs-bullet,.hljs-string{color:#b8cc52}.hljs-built_in,.hljs-section,.hljs-title{color:#ffb454}.hljs-keyword,.hljs-selector-tag,.hljs-symbol{color:#f73}.hljs-name{color:#36a3d9}.hljs-tag{color:#00568d}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-addition{color:#91b362}.hljs-deletion{color:#d96c75}
