@@ -24,7 +24,7 @@ fn pretty_retrieve(id: PasteId) -> Option<Template> {
 
     let mut contents = String::new();
     file.read_to_string(&mut contents).unwrap();
-    let theme = env::var("THEME").unwrap_or(".".to_string());
+    let theme = env::var("THEME").unwrap_or("".to_string());
 
     let mut map = HashMap::new();
     map.insert("title", id.to_string());
