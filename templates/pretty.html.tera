@@ -1,85 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Description" content="Author: Gunwant Jain,
-    A highly opinionated, minamalistic Pastebin with no bloat of a database.">
-    <title>{{ title }}</title>
+{% block styles %}
 
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css"> -->
-
-    <style>
-            @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@460&display=swap');
-
-            /* Use Ayu-Colors by default */
-            .hljs{display:block;overflow-x:auto;background:#191f26;color:#e6e1cf;padding:.5em}.hljs-comment,.hljs-quote{color:#5c6773;font-style:italic}.hljs-attr,.hljs-attribute,.hljs-link,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-template-variable,.hljs-variable{color:#f73}.hljs-builtin-name,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#fe9}.hljs-bullet,.hljs-string{color:#b8cc52}.hljs-built_in,.hljs-section,.hljs-title{color:#ffb454}.hljs-keyword,.hljs-selector-tag,.hljs-symbol{color:#f73}.hljs-name{color:#36a3d9}.hljs-tag{color:#00568d}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-addition{color:#91b362}.hljs-deletion{color:#d96c75}
-        
-            /* fill entire page */
-            code {
-                padding: 0px;
-                background: transparent !important;
-                font-family: 'Fira Code', monospace;
-            }
-
-            body {
-                /* Change background color to that of your theme's */
-                background: #191f26;
-                padding: 20px 50px;
-                margin: 0px;
-            }
-            
-                /* for block of numbers */
-            .hljs-ln-numbers {
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -khtml-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-
-                text-align: centre;
-                /* Change color to that of your theme's comment color */
-                color: #5c6773;
-                border-right: 20px solid transparent;
-                vertical-align: top;
-            }
+    /* Use Ayu-Colors by default */
+    .hljs{display:block;overflow-x:auto;background:#191f26;color:#e6e1cf;padding:.5em}.hljs-comment,.hljs-quote{color:#5c6773;font-style:italic}.hljs-attr,.hljs-attribute,.hljs-link,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-template-variable,.hljs-variable{color:#f73}.hljs-builtin-name,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#fe9}.hljs-bullet,.hljs-string{color:#b8cc52}.hljs-built_in,.hljs-section,.hljs-title{color:#ffb454}.hljs-keyword,.hljs-selector-tag,.hljs-symbol{color:#f73}.hljs-name{color:#36a3d9}.hljs-tag{color:#00568d}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-addition{color:#91b362}.hljs-deletion{color:#d96c75}
 
 
-            /* for block of code */
-            .hljs-ln-code {
-                padding-left: 10px;
-            }
+    /* for block of numbers */
+    .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
-            /* remove scrollbar */
-            html {
-                overflow: scroll;
-                overflow-x: hidden;
-                scrollbar-width: none;
-            }
-            ::-webkit-scrollbar {
-                width: 0px;
-                background: transparent;
-            }
-
-            ::selection {
-                /* text selection color
-                   make sure to change to your your preferred color if changing the default colorscheme */
-                background: #253340;
-            }
-
-        </style>
-
-        <!-- Bring your own theme -->
-        {% if theme %}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/{{ theme }}.min.css">
-        {% endif %}
-
-</head>
+        text-align: centre;
+        /* Change color to that of your theme's comment color */
+        color: #5c6773;
+        border-right: 20px solid transparent;
+        vertical-align: top;
+    }
 
 
-<body>
+    /* for block of code */
+    .hljs-ln-code {
+        padding-left: 10px;
+    }
+{% endblock styles %}
+
+
+{% block head %}
+    {% if theme %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/{{ theme }}.min.css">
+    {% endif %}
+{% endblock head %}
+
+
+{% block body %}
 <pre><code>{{ code }}</code></pre>
 
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/highlight.min.js"></script>
@@ -88,6 +46,4 @@
     hljs.initHighlightingOnLoad();
     hljs.initLineNumbersOnLoad();
 </script>
-</body>
-
-</html>
+{% endblock body %}
