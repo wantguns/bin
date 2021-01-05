@@ -1,14 +1,12 @@
 version: '3.3'
 services:
   pastebin:
-    build:
-      context: .
-    restart: always
+    image: wantguns/bin
     container_name: pastebin
     ports:
       - 127.0.0.1:6162:6162
     environment:
-      - ROCKET_PORT=6162
+      - ROCKET_PORT=6162  # Port the app uses
       - THEME=gruvbox-dark  # By default, it uses the Ayu Colorscheme
       - HOST=localhost:6162 # or bin.example.com 
     volumes:
