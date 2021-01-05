@@ -68,45 +68,10 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
 }
 
 #[get("/")]
-fn index() -> &'static str {
-"   
-USAGE
------
-
-    POST    / 
-
-        accepts raw data in the body of the request and responds with a URL
-        of a page containing the body's content
-
-    GET     /<id>
-
-        retrieves the content for the paste with id `<id>`
-
-    GET     /p/<id>
-
-        retrieves the HTML page with syntax-highlighted content for the paste with id `<id>`
-
-EXAMPLES
---------
-
-    Paste a file named 'file.txt' using cURL:
-
-        curl --data-binary @file.txt https://bin.wantguns.dev
-
-    Paste from stdin using cURL:
-
-        echo \"Hello, world.\" | curl --data-binary @- https://bin.wantguns.dev
-
-    Add this to your .zshrc to implement a quicker usage.
-
-        function paste() {
-          local file=${1:-/dev/stdin}
-          curl --data-binary @${file} https://bin.wantguns.dev
-        }
-
-    If the uploaded data binary is parsed as \"text/*\", then the paste will be syntax
-    highlighted
-"
+fn index() -> Option<Template> {
+    let mut map = HashMap::new();
+    map.insert("title", "bin");
+    Some(Template::render("index", &map))
 }
 
 fn main() {
