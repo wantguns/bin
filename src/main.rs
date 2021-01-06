@@ -35,7 +35,7 @@ fn pretty_retrieve(id: PasteId) -> Option<Template> {
     map.insert("code", contents);
     let rendered = Template::render("pretty", &map);
 
-    match tree_magic::from_filepath(filepath).contains("text") {
+    match tree_magic::match_filepath("text/plain", filepath) {
         true    =>  Some(rendered),
         false   =>  None
     }
