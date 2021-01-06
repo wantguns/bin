@@ -1,62 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="Description" content="Author: Gunwant Jain,
-    A highly opinionated, minamalistic Pastebin without the bloat of a database.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="Description"
+      content="Author: Gunwant Jain,
+    A highly opinionated, minamalistic Pastebin without the bloat of a database."
+    />
     <title>{{ title }}</title>
 
     <style>
 
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@460&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@460&display=swap');
 
-        /* fill entire page */
-        code {
-            padding: 0px;
-            background: transparent !important;
-            font-family: 'Fira Code', monospace;
-        }
+      /* fill entire page */
+      code {
+          padding: 0px;
+          background: transparent !important;
+          font-family: 'Fira Code', monospace;
+      }
 
-        body {
-            /* Change background color to that of your theme's */
-            background: #191f26;
-            padding: 20px 50px;
-            margin: 0px;
-            color: #5c6773;
-        }
+      body {
+          /* Change background color to that of your theme's */
+          background: #191f26;
+          padding: 20px 50px;
+          margin: 0px;
+          color: #5c6773;
+      }
 
-        /* remove scrollbar */
-        html {
-            overflow: scroll;
-            overflow-x: hidden;
-            scrollbar-width: none;
-        }
-        ::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-        }
+      /* remove scrollbar */
+      html {
+          overflow: scroll;
+          overflow-x: hidden;
+          scrollbar-width: none;
+      }
+      ::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+      }
 
-        ::selection {
-            /* text selection color
-               make sure to change to your your preferred color if changing the default colorscheme */
-            background: #253340;
-        }
+      ::selection {
+          /* text selection color
+             make sure to change to your your preferred color if changing the default colorscheme */
+          background: #253340;
+      }
 
-        {% block styles %}
-        {% endblock styles %}
-
+      {% block styles %}
+      {% endblock styles %}
     </style>
 
-    {% block head %}
-    {% endblock head %}
+    {% block head %} {% endblock head %}
+  </head>
 
-</head>
-
-
-<body>
+  <body>
     {% block body %}{% endblock body %}
-</body>
-
+  </body>
 </html>
