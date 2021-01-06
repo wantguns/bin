@@ -1,9 +1,83 @@
 {% extends "base" %}
 
+{% block styles %}
+    
+    html, body { margin: 0; }
+
+        body {
+            height: 100vh;
+            /* padding: 2rem; */
+            line-height: 1.1;
+            font-family: monospace;
+
+            display: flex;
+        }
+    
+    form { flex: 1; }
+
+    textarea {
+        height: 100%;
+        width: 100%;
+
+        background: none;
+        border: none;
+
+        resize: none;
+        overflow: auto;
+
+        color: inherit;
+        font-family: inherit;
+        font-size: 1rem;
+        line-height: inherit;
+    }
+
+    button[type="submit"] {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+
+        height: 4rem;
+        width: 4rem;
+        border: none;
+        border-radius: 50%;
+        background: #F29718;
+
+        font-size: 0rem;
+
+        cursor: pointer;
+    }
+   
+   textarea:focus, input:focus{
+        outline: none;
+    }
+
+    *:focus {
+        outline: none;
+    }
+
+
+    button[type="submit"].hidden { display: none; }
+{% endblock styles %}
+
 {% block body %}
-<pre> <code>
-USAGE
------
+    <form action="/submit" method="post">
+        <textarea name="val" placeholder="
+
+                                    ========
+
+WEB USAGE
+---------
+
+Soon as you start typing a big yellow button should appear on the bottom right.
+You could either press that to paste. 
+
+or 
+
+Just press Ctrl + Enter once done.
+
+
+CLI USAGE
+---------
 
     POST    / 
 
@@ -16,18 +90,37 @@ USAGE
 
     GET     /p/<id>
 
-        retrieves the HTML page with syntax-highlighted content for the paste with id `<id>`
+        retrieves the HTML page with syntax-highlighted content for the paste
+        with id `<id>`
 
-EXAMPLES
---------
+CLI EXAMPLES
+------------
 
     Paste a file named 'file.txt' using cURL:
 
         curl --data-binary @file.txt https://bin.wantguns.dev
 
-    Paste from stdin using cURL:
 
-        echo \"Hello, world.\" | curl --data-binary @- https://bin.wantguns.dev
+                                    ========
 
-    </code> </pre>
+open-sourced at:    github.com/wantguns/bin" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
+
+        <button type="submit" title="Paste">&#x2398</button>
+    </form>
+
+    <script>
+        const form = document.querySelector('form');
+        const input = document.querySelector('textarea');
+        const button = document.querySelector('button[type="submit"]');
+
+        const onInput = () => button.classList.toggle('hidden', !input.value);
+        input.addEventListener('input', onInput);
+        onInput();
+
+        document.body.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                form.submit();
+            }
+        });
+    </script>
 {% endblock body %}
