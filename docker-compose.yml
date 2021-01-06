@@ -7,6 +7,6 @@ services:
       - 127.0.0.1:6162:6162
     environment:
       - ROCKET_PORT=6162  # Port the app uses
-      - HOST=localhost:6162 # or bin.example.com 
+      - HOST_URL=localhost:6162 # or bin.example.com 
     volumes:
       - ./upload:/app/upload  # upload folder will have your pastes

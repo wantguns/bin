@@ -56,7 +56,7 @@ Deployment
      environment:
        - ROCKET_PORT=6162
        - THEME=
-       - HOST=${BIN_DOMAIN}
+       - HOST_URL=${BIN_DOMAIN}
      volumes:
        - /path/to/local/upload:/app/upload
      labels:
