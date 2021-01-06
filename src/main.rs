@@ -7,9 +7,12 @@ use std::env;
 use std::io::prelude::*;
 use std::collections::HashMap;
 use std::path::Path;
+use std::fs;
 use std::fs::File;
 
 use rocket_contrib::templates::Template;
+use rocket::request::Form;
+use rocket::response::Redirect;
 use rocket::Data;
 
 mod paste_id;
@@ -57,14 +60,31 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
     paste.stream_to_file(filepath)?;
 
     let url = match tree_magic::from_filepath(filepath).as_str().contains("text") {
-        true    => format!("https://{host}/p/{id}\n", host = env::var("HOST")
+        true    => format!("https://{host}/p/{id}\n", host = env::var("HOST_URL")
             .unwrap_or("<no_host_provided>".to_string()), id = id),
 
-        false   => format!("https://{host}/{id}\n", host = env::var("HOST")
-            .unwrap_or("<no_host_provided>".to_string()), id = id)
+        false   => format!("https://{host}/{id}\n", host = env::var("HOST_URL")
+            .unwrap_or("http://localhost:8000".to_string()), id = id)
     };
 
     Ok(url)
+}
+
+#[derive(FromForm)]
+struct PasteIdForm {
+    val: String,
+}
+
+#[post("/submit", data = "<paste>")]
+fn submit(paste: Form<PasteIdForm>) -> Redirect {
+    let id = PasteId::new(4);
+    
+    let filename = format!("upload/{id}", id = id);
+    let content = paste.into_inner().val;
+
+    fs::write(&filename, content).expect("Unable to write to the file");
+
+    Redirect::to(format!("/p/{id}", id = id))
 }
 
 #[get("/")]
@@ -76,7 +96,7 @@ fn index() -> Option<Template> {
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![index, upload, retrieve, pretty_retrieve])
+        .mount("/", routes![index, upload, submit, retrieve, pretty_retrieve])
         .attach(Template::fairing())
         .launch();
 }
