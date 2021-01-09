@@ -2,13 +2,14 @@
 
 {% block styles %}
     
-    html, body { margin: 0; }
+        html, body {
+            overflow-y:hidden;
+        }
 
         body {
             height: 100vh;
-            /* padding: 2rem; */
-            line-height: 1.1;
             font-family: monospace;
+            padding: 3rem;
 
             display: flex;
         }
@@ -16,18 +17,19 @@
     form { flex: 1; }
 
     textarea {
-        height: 100%;
+        height: 90%;
         width: 100%;
 
         background: none;
         border: none;
 
+        padding-left: 10px
+
         resize: none;
         overflow: auto;
 
         color: inherit;
-        font-family: inherit;
-        font-size: 1rem;
+        font-family: 'Fira Code', monospace;
         line-height: inherit;
     }
 
@@ -68,37 +70,17 @@
 WEB USAGE
 ---------
 
-Soon as you start typing a big yellow button should appear on the bottom right.
-You could either press that to paste. 
+    Press the big yellow button to paste. 
 
-or 
+    or 
 
-Just press Ctrl + Enter once done.
+    Just press Ctrl + Enter once done.
 
 
 CLI USAGE
 ---------
 
-    POST    / 
-
-        accepts raw data in the body of the request and responds with a URL
-        of a page containing the body's content
-
-    GET     /<id>
-
-        retrieves the content for the paste with id `<id>`
-
-    GET     /p/<id>
-
-        retrieves the HTML page with syntax-highlighted content for the paste
-        with id `<id>`
-
-CLI EXAMPLES
-------------
-
-    Paste a file named 'file.txt' using cURL:
-
-        curl --data-binary @file.txt https://bin.wantguns.dev
+    curl --data-binary @file.txt https://bin.wantguns.dev
 
 
                                     ========
