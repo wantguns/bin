@@ -21,7 +21,7 @@ impl<'a> PasteId<'a> {
             .collect();
 
         PasteId(Cow::Owned(id))
-    }    
+    }
 }
 
 impl<'a> FromParam<'a> for PasteId<'a> {
@@ -30,7 +30,7 @@ impl<'a> FromParam<'a> for PasteId<'a> {
     fn from_param(param: &'a RawStr) -> Result<Self, Self::Error> {
         match valid_id(param) {
             true => Ok(PasteId(Cow::Borrowed(param))),
-            false => Err(param)
+            false => Err(param),
         }
     }
 }

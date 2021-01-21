@@ -1,19 +1,20 @@
 #![feature(proc_macro_hygiene, decl_macro)]
-#[macro_use] extern crate rocket;
+#[macro_use]
+extern crate rocket;
 
 extern crate tree_magic;
 
-use std::env;
-use std::io::prelude::*;
 use std::collections::HashMap;
-use std::path::Path;
+use std::env;
 use std::fs;
 use std::fs::File;
+use std::io::prelude::*;
+use std::path::Path;
 
-use rocket_contrib::templates::Template;
 use rocket::request::Form;
 use rocket::response::Redirect;
 use rocket::Data;
+use rocket_contrib::templates::Template;
 
 mod paste_id;
 
@@ -36,8 +37,8 @@ fn pretty_retrieve(id: PasteId) -> Option<Template> {
     let rendered = Template::render("pretty", &map);
 
     match tree_magic::match_filepath("text/plain", filepath) {
-        true    =>  Some(rendered),
-        false   =>  None
+        true => Some(rendered),
+        false => None,
     }
 }
 
@@ -59,12 +60,21 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
     //      Look into using open(), take() methods in the Data struct
     paste.stream_to_file(filepath)?;
 
-    let url = match tree_magic::from_filepath(filepath).as_str().contains("text") {
-        true    => format!("https://{host}/p/{id}\n", host = env::var("HOST_URL")
-            .unwrap_or("<no_host_provided>".to_string()), id = id),
+    let url = match tree_magic::from_filepath(filepath)
+        .as_str()
+        .contains("text")
+    {
+        true => format!(
+            "https://{host}/p/{id}\n",
+            host = env::var("HOST_URL").unwrap_or("<no_host_provided>".to_string()),
+            id = id
+        ),
 
-        false   => format!("https://{host}/{id}\n", host = env::var("HOST_URL")
-            .unwrap_or("http://localhost:8000".to_string()), id = id)
+        false => format!(
+            "https://{host}/{id}\n",
+            host = env::var("HOST_URL").unwrap_or("http://localhost:8000".to_string()),
+            id = id
+        ),
     };
 
     Ok(url)
@@ -78,7 +88,7 @@ struct PasteIdForm {
 #[post("/submit", data = "<paste>")]
 fn submit(paste: Form<PasteIdForm>) -> Redirect {
     let id = PasteId::new(4);
-    
+
     let filename = format!("upload/{id}", id = id);
     let content = paste.into_inner().val;
 
@@ -96,7 +106,10 @@ fn index() -> Option<Template> {
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![index, upload, submit, retrieve, pretty_retrieve])
+        .mount(
+            "/",
+            routes![index, upload, submit, retrieve, pretty_retrieve],
+        )
         .attach(Template::fairing())
         .launch();
 }
