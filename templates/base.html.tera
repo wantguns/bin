@@ -12,22 +12,17 @@
 
     <style>
 
-      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@460&display=swap');
-
       /* fill entire page */
       code {
-          padding: 0px;
           background: transparent !important;
-          font-family: 'Fira Code', monospace;
+          font-family: monospace;
       }
 
       body {
           /* Change background color to that of your theme's */
           background: #191f26;
-          padding: 20px 50px;
-          margin: 0px;
+          padding: 10px;
           color: #E6E1CF;
-          /* color: #5c6773; */
       }
 
       ::selection {

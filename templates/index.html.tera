@@ -9,7 +9,6 @@ overflow-y:hidden;
 body {
 height: 100vh;
 font-family: monospace;
-padding: 3rem;
 
 display: flex;
 }
@@ -23,13 +22,11 @@ width: 100%;
 background: none;
 border: none;
 
-padding-left: 10px
-
 resize: none;
 overflow: auto;
 
 color: inherit;
-font-family: 'Fira Code', monospace;
+font-family: monospace;
 line-height: inherit;
 }
 
@@ -49,53 +46,40 @@ font-size: 0rem;
 cursor: pointer;
 }
 
-textarea:focus, input:focus {
-outline: none;
-}
-
 *:focus {
 outline: none;
 }
 
 button[type="submit"].hidden { display: none; }
-
-#drop_zone {
-border: 1px dashed grey;
-width: 100%;
-height: 100%;
-}
 {% endblock styles %}
 
 {% block body %}
 <form action="/submit" method="post">
-    <textarea style="resize: none" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" placeholder="
+    <textarea name="val" style="resize: none" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" placeholder="
 
-                                    ========
+bin(3)                            Bin Manual                              bin(3)
+
+NAME
+        bin - A highly opinionated and minamalistic Pastebin
 
 WEB USAGE
----------
-
-    Drag a file and drop it here.
-
-    or
-
-    After typing, press the big yellow button to paste. 
-
-    or 
-
-    Just press Ctrl + Enter once done.
-
+        Drag a file and drop it here, or
+        After typing, press the big yellow button to paste, or
+        Just press Ctrl + Enter once done.
 
 CLI USAGE
----------
+        curl -Ls -o /dev/null -w %{url_effective} --data-binary @file.txt https://bin.wantguns.dev 
 
-    curl -Ls -o /dev/null -w %{url_effective} --data-binary @file.txt https://bin.wantguns.dev
+        Better use cases of CLI mentioned at Github
 
-    Better use-cases of CLI mentioned at Github.
+SEE ALSO
+        github.com/wantguns/bin
 
-                                    ========
+AUTHOR
+        Gunwant Jain
 
-open-sourced at:    github.com/wantguns/bin" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
+                                    2021-06-19                            bin(3)
+" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
         spellcheck="false"></textarea>
 
     <button type="submit" title="Paste">&#x2398</button>
@@ -105,6 +89,16 @@ open-sourced at:    github.com/wantguns/bin" autofocus autocomplete="off" autoco
     const form = document.querySelector('form');
     const input = document.querySelector('textarea');
     const button = document.querySelector('button[type="submit"]');
+
+    const onInput = () => button.classList.toggle('hidden', !input.value);
+    input.addEventListener('input', onInput);
+    onInput();
+
+    document.body.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.ctrlKey) {
+            form.submit();
+        }
+    });
 
     async function postData(url = '', data) {
         const response = await fetch(url, {
@@ -116,16 +110,6 @@ open-sourced at:    github.com/wantguns/bin" autofocus autocomplete="off" autoco
         });
         return response;
     }
-
-    const onInput = () => button.classList.toggle('hidden', !input.value);
-    input.addEventListener('input', onInput);
-    onInput();
-
-    document.body.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && e.ctrlKey) {
-            form.submit();
-        }
-    });
 
     function dropHandler(ev) {
         console.log('File(s) dropped');
@@ -155,5 +139,12 @@ open-sourced at:    github.com/wantguns/bin" autofocus autocomplete="off" autoco
             }
         }
     }
+
+    function dragOverHandler(ev) {
+        console.log('File(s) in drop zone');
+
+        ev.preventDefault();
+    }
+
 </script>
 {% endblock body %}
