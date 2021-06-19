@@ -50,7 +50,7 @@ fn retrieve(id: PasteId) -> Option<File> {
 }
 
 #[post("/", data = "<paste>")]
-fn upload(paste: Data) -> Result<String, std::io::Error> {
+fn upload(paste: Data) -> Result<Redirect, std::io::Error> {
     let id = PasteId::new(4);
 
     let filename = format!("upload/{id}", id = id);
@@ -65,19 +65,17 @@ fn upload(paste: Data) -> Result<String, std::io::Error> {
         .contains("text")
     {
         true => format!(
-            "https://{host}/p/{id}\n",
-            host = env::var("HOST_URL").unwrap_or("<no_host_provided>".to_string()),
+            "/p/{id}",
             id = id
         ),
 
         false => format!(
-            "https://{host}/{id}\n",
-            host = env::var("HOST_URL").unwrap_or("http://localhost:8000".to_string()),
+            "/{id}",
             id = id
-        ),
+        )
     };
 
-    Ok(url)
+    Ok(Redirect::to(url))
 }
 
 #[derive(FromForm)]

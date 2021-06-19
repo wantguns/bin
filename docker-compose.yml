@@ -1,7 +1,8 @@
 version: '3.3'
 services:
   pastebin:
-    image: wantguns/bin
+    build: .
+    # image: wantguns/bin
     container_name: pastebin
     ports:
       - 127.0.0.1:6162:6162

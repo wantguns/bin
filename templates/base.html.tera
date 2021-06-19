@@ -6,7 +6,7 @@
     <meta
       name="Description"
       content="Author: Gunwant Jain,
-    A highly opinionated, minamalistic Pastebin without the bloat of a database."
+    A highly opinionated and minamalistic Pastebin."
     />
     <title>{{ title }}</title>
 
@@ -26,7 +26,8 @@
           background: #191f26;
           padding: 20px 50px;
           margin: 0px;
-          color: #5c6773;
+          color: #E6E1CF;
+          /* color: #5c6773; */
       }
 
       ::selection {
