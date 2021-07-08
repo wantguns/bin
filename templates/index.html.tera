@@ -16,7 +16,7 @@ display: flex;
 form { flex: 1; }
 
 textarea {
-height: 90%;
+height: 100%;
 width: 100%;
 
 background: none;
@@ -57,18 +57,25 @@ button[type="submit"].hidden { display: none; }
 <form action="/submit" method="post">
     <textarea name="val" style="resize: none" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" placeholder="
 
-bin(3)                            Bin Manual                              bin(3)
+bin(3)                                BIN                               bin(3)
 
 NAME
+
         bin - A highly opinionated and minamalistic Pastebin
 
 WEB USAGE
-        Drag a file and drop it here, or
-        After typing, press the big yellow button to paste, or
+
+        Drag a file and drop it here, 
+        or After typing, press the big yellow button to paste, or
         Just press Ctrl + Enter once done.
 
 CLI USAGE
-        curl -Ls -o /dev/null -w %{url_effective} --data-binary @file.txt https://bin.wantguns.dev 
+
+        curl \
+            -Ls -o /dev/null \
+            -w %{url_effective} \
+            --data-binary @file.txt \
+            https://bin.wantguns.dev
 
         Better use cases of CLI mentioned at Github
 
@@ -78,7 +85,7 @@ SEE ALSO
 AUTHOR
         Gunwant Jain
 
-                                    2021-06-19                            bin(3)
+                                    2021-06-20                            bin(3)
 " autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
         spellcheck="false"></textarea>
 

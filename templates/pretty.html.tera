@@ -1,49 +1,20 @@
 {% extends "base" %}
 
 {% block styles %}
-
-    /* Use Ayu-Colors by default */
-    .hljs{display:block;overflow-x:auto;background:#191f26;color:#e6e1cf;padding:.5em}.hljs-comment,.hljs-quote{color:#5c6773;font-style:italic}.hljs-attr,.hljs-attribute,.hljs-link,.hljs-regexp,.hljs-selector-class,.hljs-selector-id,.hljs-template-variable,.hljs-variable{color:#f73}.hljs-builtin-name,.hljs-literal,.hljs-meta,.hljs-number,.hljs-params,.hljs-type{color:#fe9}.hljs-bullet,.hljs-string{color:#b8cc52}.hljs-built_in,.hljs-section,.hljs-title{color:#ffb454}.hljs-keyword,.hljs-selector-tag,.hljs-symbol{color:#f73}.hljs-name{color:#36a3d9}.hljs-tag{color:#00568d}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-addition{color:#91b362}.hljs-deletion{color:#d96c75}
-
-
-    /* for block of numbers */
-    .hljs-ln-numbers {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-
-        text-align: centre;
-        /* Change color to that of your theme's comment color */
-        color: #5c6773;
-        border-right: 20px solid transparent;
-        vertical-align: top;
-    }
-
-
-    /* for block of code */
-    .hljs-ln-code {
-        padding-left: 10px;
-    }
+body {
+    padding: 10px;
+}
+pre {
+    margin: 0px;
+    font-family: monospace;
+}
 {% endblock styles %}
 
 
 {% block head %}
-    {% if theme %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/styles/{{ theme }}.min.css">
-    {% endif %}
 {% endblock head %}
 
 
 {% block body %}
-<pre><code>{{ code }}</code></pre>
-
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.5.0/build/highlight.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
-<script>
-    hljs.initHighlightingOnLoad();
-    hljs.initLineNumbersOnLoad();
-</script>
+{{ body | safe }}
 {% endblock body %}
