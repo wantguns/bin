@@ -60,32 +60,40 @@ button[type="submit"].hidden { display: none; }
 bin(3)                                BIN                               bin(3)
 
 NAME
+       bin - A highly opinionated and minamalistic Pastebin
 
-        bin - A highly opinionated and minamalistic Pastebin
+ROUTES
+       GET /<id>
+           Get raw pastes
+       GET /p/<id> 
+           Get highlighted pastes 
+       GET /p/<id>.<ext> 
+           Get syntax highlighted pastes. 
+           E.g. https://bin.wantguns.dev/p/foobaz.cpp should return a C++ syntax
+           highlighted paste
 
 WEB USAGE
+       Drag a file and drop it here, or
+       Paste an image from your clipboard using Ctrl + v, or
+       After typing, press the big yellow button to paste, or
+       Just press Ctrl + Enter once done typing.
 
-        Drag a file and drop it here, 
-        or After typing, press the big yellow button to paste, or
-        Just press Ctrl + Enter once done.
+       Tip: Set your browser's monospace font to the one you prefer
 
 CLI USAGE
+       curl \
+           -Ls -o /dev/null \
+           -w %{url_effective} \
+           --data-binary @file.txt \
+           https://bin.wantguns.dev | tee >(xclip -selection clipboard)
 
-        curl \
-            -Ls -o /dev/null \
-            -w %{url_effective} \
-            --data-binary @file.txt \
-            https://bin.wantguns.dev
-
-        Better use cases of CLI mentioned at Github
+       Better use cases of CLI mentioned at Github
 
 SEE ALSO
-        github.com/wantguns/bin
+       github.com/wantguns/bin
 
 AUTHOR
-        Gunwant Jain
-
-                                    2021-06-20                            bin(3)
+       Gunwant Jain
 " autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
         spellcheck="false"></textarea>
 
