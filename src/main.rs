@@ -1,6 +1,7 @@
 #[macro_use]
 extern crate rocket;
 use rocket::data::{Data, ToByteUnit};
+use rocket::shield::{Shield, NoSniff};
 use rocket::{form::Form, response::Redirect};
 use rocket_dyn_templates::Template;
 
@@ -117,6 +118,8 @@ async fn index() -> Option<Template> {
 
 #[launch]
 fn rocket() -> _ {
+    let shield = Shield::default().disable::<NoSniff>();
+
     rocket::build()
         .mount(
             "/",
@@ -129,5 +132,6 @@ fn rocket() -> _ {
                 pretty_retrieve_ext
             ],
         )
+        .attach(shield)
         .attach(Template::fairing())
 }

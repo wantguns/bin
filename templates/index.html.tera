@@ -119,15 +119,12 @@ AUTHOR
     }
 
     function dropHandler(ev) {
-        console.log('File(s) dropped');
-
         ev.preventDefault();
 
         if (ev.dataTransfer.items) {
             for (var i = 0; i < ev.dataTransfer.items.length; i++) {
                 if (ev.dataTransfer.items[i].kind === 'file') {
                     var file = ev.dataTransfer.items[i].getAsFile();
-                    console.log('... file[' + i + '].name = ' + file.name);
 
                     var url = window.location.href;
 
@@ -140,17 +137,28 @@ AUTHOR
                         });
                 }
             }
-        } else {
-            for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-                console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
-            }
-        }
+        }    
     }
 
     function dragOverHandler(ev) {
-        console.log('File(s) in drop zone');
-
         ev.preventDefault();
+    }
+
+    document.onpaste = function(pasteEvent) {
+        var item = pasteEvent.clipboardData.items[0];
+        var blob = item.getAsFile();
+
+        if (blob !== null && blob !== '') {
+            var url = window.location.href;
+
+            postData(url, blob)
+                .then(data => {
+                    window.location.href = data.url;
+                })
+                .catch(function (err) {
+                    console.info(err + " url: " + url);
+                });
+        }
     }
 
 </script>
