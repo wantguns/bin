@@ -126,32 +126,31 @@ AUTHOR
         return response;
     }
 
+    // drag and drop files
     function dropHandler(ev) {
         ev.preventDefault();
 
         if (ev.dataTransfer.items) {
-            for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-                if (ev.dataTransfer.items[i].kind === 'file') {
-                    var file = ev.dataTransfer.items[i].getAsFile();
+            var item = ev.dataTransfer.items[0];
+            var blob = item.getAsFile();
+            const ext = blob.name.split(".")[1];
+            var url = window.location.href;
 
-                    var url = window.location.href;
-
-                    postData(url, file)
-                        .then(data => {
-                            window.location.href = data.url;
-                        })
-                        .catch(function (err) {
-                            console.info(err + " url: " + url);
-                        });
-                }
-            }
-        }    
+            postData(url, blob)
+                .then(data => {
+                    window.location.href = data.url + "." + ext;
+                })
+                .catch(function (err) {
+                    console.info(err + " url: " + url);
+                });
+        }
     }
 
     function dragOverHandler(ev) {
         ev.preventDefault();
     }
 
+    // pasting files from the clipboard
     document.onpaste = function(pasteEvent) {
         var item = pasteEvent.clipboardData.items[0];
         var blob = item.getAsFile();

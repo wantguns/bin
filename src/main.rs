@@ -18,6 +18,7 @@ fn rocket() -> _ {
                 routes::upload::upload,
                 routes::submit::submit,
                 routes::retrieve::retrieve,
+                routes::retrieve::retrieve_ext,
                 routes::pretty_retrieve::pretty_retrieve,
                 routes::pretty_retrieve_ext::pretty_retrieve_ext
             ],
