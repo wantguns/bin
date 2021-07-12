@@ -1,7 +1,6 @@
 use rocket_dyn_templates::Template;
 
 use std::collections::HashMap;
-use std::env;
 use std::path::Path;
 
 use crate::models::paste_id::PasteId;
@@ -13,11 +12,9 @@ pub async fn pretty_retrieve(id: PasteId<'_>) -> Option<Template> {
     let filepath = Path::new(&filename);
 
     let contents = get_pretty_body(&filename, &String::from("txt"));
-    let theme = env::var("THEME").unwrap_or("".to_string());
 
     let mut map = HashMap::new();
     map.insert("title", id.to_string());
-    map.insert("theme", theme);
     map.insert("body", contents);
     let rendered = Template::render("pretty", &map);
 
