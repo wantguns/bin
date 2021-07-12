@@ -1,6 +1,6 @@
 #[macro_use]
 extern crate rocket;
-use rocket::shield::{Shield, NoSniff};
+use rocket::shield::{NoSniff, Shield};
 use rocket_dyn_templates::Template;
 
 mod models;
@@ -15,6 +15,7 @@ fn rocket() -> _ {
             "/",
             routes![
                 routes::index::index,
+                routes::static_files::static_files,
                 routes::upload::upload,
                 routes::submit::submit,
                 routes::retrieve::retrieve,
