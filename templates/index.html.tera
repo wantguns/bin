@@ -72,8 +72,8 @@ button[type="submit"].hidden { display: none; }
 
 {% block body %}
 <form action="/submit" method="post">
-<div class=grid_form>
-    <textarea name="val" style="resize: none" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" placeholder="
+<div class=grid_form ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+    <textarea name="val" style="resize: none" placeholder="
 
 bin(3)                                BIN                               bin(3)
 
