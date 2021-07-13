@@ -54,7 +54,7 @@ button[type="submit"] {
     border: none;
     padding: 0 1em 0 0;
     margin: 0;
-    width: 70%;
+    width: 50%;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
@@ -206,7 +206,9 @@ AUTHOR
             },
             body: data
         });
-        return response;
+
+        const text = await response.text();
+        return text;
     }
 
     // drag and drop files
@@ -221,7 +223,7 @@ AUTHOR
 
             postData(url, blob)
                 .then(data => {
-                    window.location.href = data.url + "." + ext;
+                    window.location.href = data + "." + ext;
                 })
                 .catch(function (err) {
                     console.info(err + " url: " + url);
@@ -243,7 +245,7 @@ AUTHOR
 
             postData(url, blob)
                 .then(data => {
-                    window.location.href = data.url;
+                    window.location.href = data;
                 })
                 .catch(function (err) {
                     console.info(err + " url: " + url);

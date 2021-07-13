@@ -1,0 +1,10 @@
+#!/bin/sh
+
+url="http://127.0.0.1:8000"
+filepath="$1"
+filename=$(basename -- "$filepath")
+extension="${filename##*.}"
+
+response=$(curl --data-binary @${filepath:-/dev/stdin} --url $url)
+echo "$url$response"".""$extension" | tee >(xclip -selection clipboard)
+

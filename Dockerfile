@@ -6,6 +6,7 @@ RUN cargo install --path .
 RUN cargo clean
 
 RUN mkdir -p upload
+COPY ./client upload/client
 COPY ./templates templates
 COPY ./static static
 

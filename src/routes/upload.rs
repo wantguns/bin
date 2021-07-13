@@ -1,12 +1,11 @@
 use rocket::data::{Data, ToByteUnit};
-use rocket::response::Redirect;
 
 use std::path::Path;
 
 use crate::models::paste_id::PasteId;
 
 #[post("/", data = "<paste>")]
-pub async fn upload(paste: Data<'_>) -> Result<Redirect, std::io::Error> {
+pub async fn upload(paste: Data<'_>) -> Result<String, std::io::Error> {
     let id = PasteId::new(6);
 
     let filename = format!("upload/{id}", id = id);
@@ -23,5 +22,5 @@ pub async fn upload(paste: Data<'_>) -> Result<Redirect, std::io::Error> {
         false => format!("/{id}", id = id),
     };
 
-    Ok(Redirect::to(url))
+    Ok(url)
 }
