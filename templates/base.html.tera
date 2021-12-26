@@ -20,7 +20,7 @@
       body {
           /* Change background color to that of your theme's */
           background: #0f1419;
-          border: 10px solid transparent;
+          padding: 10px;
           color: #E6E1CF;
       }
 

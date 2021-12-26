@@ -24,7 +24,7 @@ form.highlight {
 }
 
 textarea {
-    height: 90%;
+    height: 100%;
     width: 100%;
 
     background: none;
@@ -61,6 +61,21 @@ button[type="submit"] {
     font-size: inherit;
     line-height: inherit;
     cursor: pointer;
+}
+
+#upload_card {
+    display: none;
+}
+
+#upload_card.show {
+    height: 90%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 40px;
 }
 
 *:focus {

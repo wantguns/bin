@@ -110,6 +110,7 @@ AUTHOR
 
         <button type="submit" title="Paste">Paste</button>
     </div>
+    <div id="upload_card"><h5>Uploading...</h5></div>
 </form>
 
 <script src="/js/index.js"></script>

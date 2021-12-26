@@ -1,6 +1,7 @@
 const body = document.querySelector('body');
 const form = document.querySelector('form');
 const grid_form = document.querySelector('.grid_form');
+const upload_card = document.querySelector('#upload_card');
 const textarea = document.querySelector('textarea');
 const select = document.querySelector('select');
 const submitButton = document.querySelector('button[type="submit"]');
@@ -48,7 +49,7 @@ function preventDefaults(e) {
 });
 
 // unhighlight the dragarea
-['dragleave', 'drop'].forEach(eventName => {
+['dragleave'].forEach(eventName => {
     form.addEventListener(eventName, unhighlight, false);
 });
 
@@ -66,18 +67,24 @@ function unhighlight(e) {
 function dropHandler(ev) {
     ev.preventDefault();
 
+    // Give a visual cue
+    upload_card.classList.add('show');
+    grid_form.classList.add('hidden');
+
     if (ev.dataTransfer.items) {
         var item = ev.dataTransfer.items[0];
         var blob = item.getAsFile();
         const ext = blob.name.split(".")[1];
         var url = window.location.href;
 
-        // Give a visual cue
-        grid_form.classList.add('hidden');
-
         postData(url, blob)
             .then(data => {
                 window.location.href = data + "." + ext;
+
+                // remove the jazz for if user returns to the prev page
+                upload_card.classList.remove('show');
+                grid_form.classList.remove('hidden');
+                form.classList.remove('highlight');
             })
             .catch(function (err) {
                 console.info(err + " url: " + url);
