@@ -1,13 +1,16 @@
 {% extends "base" %}
 
 {% block styles %}
-body {
-    padding: 10px;
-}
-pre {
-    margin: 0px;
-    font-family: monospace;
-}
+<style>
+    body {
+        padding: 10px;
+    }
+
+    pre {
+        margin: 0px;
+        font-family: monospace;
+    }
+</style>
 {% endblock styles %}
 
 

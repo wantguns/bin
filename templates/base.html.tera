@@ -11,7 +11,6 @@
     <title>{{ title }}</title>
 
     <style>
-
       /* fill entire page */
       code {
           background: transparent !important;
@@ -21,7 +20,7 @@
       body {
           /* Change background color to that of your theme's */
           background: #0f1419;
-          padding: 10px;
+          border: 10px solid transparent;
           color: #E6E1CF;
       }
 
@@ -31,9 +30,9 @@
           background: #253340;
       }
 
-      {% block styles %}
-      {% endblock styles %}
     </style>
+    {% block styles %}
+    {% endblock styles %}
 
     {% block head %} {% endblock head %}
   </head>

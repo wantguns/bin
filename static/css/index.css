@@ -1,0 +1,72 @@
+html,
+body {
+    overflow-y: hidden;
+}
+
+body {
+    height: 95vh;
+    font-family: monospace;
+
+    display: grid;
+}
+
+form.highlight {
+    border: 1vh dashed #F29718;
+}
+
+.grid_form {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    height: 100vh;
+    margin-top: 1vh;
+    align-items: start;
+    justify-items: center;
+}
+
+textarea {
+    height: 90%;
+    width: 100%;
+
+    background: none;
+    border: none;
+
+    resize: none;
+    overflow: auto;
+
+    color: inherit;
+    font-family: monospace;
+    line-height: inherit;
+}
+
+select {
+    color: inherit;
+    background-color: #0f1419;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 80%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+}
+
+button[type="submit"] {
+    background-color: #F29718;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 50%;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
+*:focus {
+    outline: none;
+}
+
+*.hidden {
+    display: none;
+}
