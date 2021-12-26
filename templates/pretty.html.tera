@@ -8,7 +8,7 @@
 
     pre {
         margin: 0px;
-        font-family: monospace;
+        font-family: 'Fira Code', monospace;
     }
 </style>
 {% endblock styles %}

@@ -5,7 +5,7 @@ body {
 
 body {
     height: 95vh;
-    font-family: monospace;
+    font-family: 'Fira Code', monospace;
 
     display: grid;
 }
@@ -16,11 +16,26 @@ form.highlight {
 
 .grid_form {
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 20fr;
+    grid-gap: 2em;
     height: 100vh;
     margin-top: 1vh;
-    align-items: start;
-    justify-items: center;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.textareaBox {
+    grid-column: 1/2;
+    grid-row: 1/3;
+}
+
+.selectBox {
+    grid-row: 2/3;
+}
+
+.submitButtonBox {
+    grid-row: 1/2;
 }
 
 textarea {
@@ -34,7 +49,8 @@ textarea {
     overflow: auto;
 
     color: inherit;
-    font-family: monospace;
+    font-family: 'Fira Code', monospace;
+    font-size: inherit;
     line-height: inherit;
 }
 
@@ -42,21 +58,39 @@ select {
     color: inherit;
     background-color: #0f1419;
     border: none;
-    padding: 0 1em 0 0;
-    margin: 0;
-    width: 80%;
+    width: 100%;
     font-family: inherit;
     font-size: inherit;
     cursor: inherit;
     line-height: inherit;
 }
 
+option {
+    padding: 0.3em;
+    height: 1.2em;
+}
+
+option:focus {
+    background-color: #E6E1CF;
+    color: #0f1419;
+}
+
+option:checked {
+    background-color: #E6E1CF;
+    color: #0f1419;
+}
+
+option:hover {
+    background-color: #E6E1CF;
+    color: #0f1419;
+}
+
 button[type="submit"] {
     background-color: #F29718;
+    color: #0f1419;
     border: none;
-    padding: 0 1em 0 0;
-    margin: 0;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
