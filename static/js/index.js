@@ -6,6 +6,15 @@ const textarea = document.querySelector('textarea');
 const select = document.querySelector('select');
 const submitButton = document.querySelector('button[type="submit"]');
 
+window.onload = () => {
+    if (localStorage["forkText"] !== null) {
+        const textArea = document.getElementById('textarea_content');
+        textArea.textContent = localStorage["forkText"];
+        localStorage.clear();
+        onInput();
+    }
+}
+
 const onInput = () => {
     submitButton.classList.toggle('hidden', !textarea.value);
     select.classList.toggle('hidden', !textarea.value);

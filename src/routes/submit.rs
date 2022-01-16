@@ -6,7 +6,7 @@ use crate::models::paste_id::PasteId;
 
 #[derive(FromForm)]
 pub struct PasteIdForm {
-    val: String,
+    content: String,
     ext: String,
 }
 
@@ -15,7 +15,7 @@ pub async fn submit(paste: Form<PasteIdForm>) -> Redirect {
     let id = PasteId::new(6);
 
     let filename = format!("upload/{id}", id = id);
-    let content = &paste.val;
+    let content = &paste.content;
     let ext = &paste.ext;
 
     fs::write(&filename, content).expect("Unable to write to the file");

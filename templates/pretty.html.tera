@@ -11,6 +11,7 @@
         font-family: 'Iosevka Web', monospace;
     }
 </style>
+<link rel="stylesheet" href="/static/css/pretty.css">
 {% endblock styles %}
 
 
@@ -19,5 +20,15 @@
 
 
 {% block body %}
-{{ body | safe }}
+<div class="rootBox">
+    <div id="pasteContent">
+        {{ body | safe }}
+    </div>
+    <div class="topRightBox"> 
+        <button onclick="forkClicked()">&#x2442; Fork</button>
+        <button onclick="newPasteClicked()">&#43; New</button>
+    </div>
+</div>
+
+<script src="/static/js/pretty.js"></script>
 {% endblock body %}

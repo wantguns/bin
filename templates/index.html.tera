@@ -8,7 +8,7 @@
 <form action="/submit" method="post" ondrop="dropHandler(event)">
     <div class=grid_form>
         <div class="textareaBox">
-            <textarea name="val" style="resize: none" placeholder="
+            <textarea name="content" id="textarea_content" style="resize: none" placeholder="
 
 bin(3)                                BIN                               bin(3)
 
@@ -43,7 +43,7 @@ AUTHOR
         </div>
         <div class="selectBox">
             <select id="ext" name="ext" size="15">
-                <option value="txt">Plain Text</option>
+                <option selected value="txt">Plain Text</option>
                 <option value="asa">ASP</option>
                 <option value="asp">HTML (ASP)</option>
                 <option value="as">ActionScript</option>
@@ -110,7 +110,7 @@ AUTHOR
         </div>
 
         <div class="submitButtonBox">
-            <button type="submit" title="Paste">Slap it !</button>
+            <button type="submit" title="Paste">Paste</button>
         </div>
     </div>
     <div id="upload_card">
