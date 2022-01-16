@@ -3,9 +3,13 @@ body {
     overflow-y: hidden;
 }
 
+* {
+    font-family: 'Iosevka Web', monospace;
+}
+
 body {
     height: 95vh;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Iosevka Web', monospace;
 
     display: grid;
 }
@@ -49,7 +53,6 @@ textarea {
     overflow: auto;
 
     color: inherit;
-    font-family: 'Fira Code', monospace;
     font-size: inherit;
     line-height: inherit;
 }

@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/static/media/favicon-16x16.png" />
   <link rel="icon" type="image/x-icon" href="/static/media/favicon.ico" />
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css">
+  <link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet" />
 
   <title>{{ title }}</title>
 
@@ -26,7 +26,6 @@
     /* fill entire page */
     code {
       background: transparent !important;
-      font-family: 'Fira Code', monospace;
     }
 
     body {
