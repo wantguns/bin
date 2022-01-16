@@ -18,7 +18,6 @@ pub async fn upload(paste: Data<'_>) -> Result<String, std::io::Error> {
         .contains("text")
     {
         true => format!("/p/{id}", id = id),
-
         false => format!("/{id}", id = id),
     };
 

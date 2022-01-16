@@ -3,8 +3,8 @@ use rocket_dyn_templates::Template;
 use std::collections::HashMap;
 use std::path::Path;
 
-use crate::models::pretty_syntax::PasteIdSyntax;
 use crate::models::pretty::get_pretty_body;
+use crate::models::pretty_syntax::PasteIdSyntax;
 
 #[get("/p/<id_ext>", rank = 1)]
 pub async fn pretty_retrieve_ext(id_ext: PasteIdSyntax<'_>) -> Option<Template> {

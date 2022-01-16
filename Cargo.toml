@@ -2,13 +2,13 @@
 name = "bin"
 version = "0.1.0"
 authors = ["Gunwant Jain <mail@wantguns.dev>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
-rand = "0.8.0"
+rand = "0.8.4"
 rocket = "0.5.0-rc.1"
 tree_magic = "0.2.3"
-syntect = "4.5.0"
+syntect = "4.6.0"
 
 [dependencies.rocket_dyn_templates]
 version = "0.1.0-rc.1"

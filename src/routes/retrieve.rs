@@ -1,7 +1,7 @@
 use std::fs::File;
 
-use crate::models::pretty_syntax::PasteIdSyntax;
 use crate::models::paste_id::PasteId;
+use crate::models::pretty_syntax::PasteIdSyntax;
 
 #[get("/<id>", rank = 2)]
 pub async fn retrieve(id: PasteId<'_>) -> Option<File> {
@@ -17,4 +17,3 @@ pub async fn retrieve_ext(id_ext: PasteIdSyntax<'_>) -> Option<File> {
 
     File::open(&filename).ok()
 }
-
