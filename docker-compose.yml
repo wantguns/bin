@@ -1,13 +1,12 @@
 version: '3.3'
 services:
   pastebin:
-    build: .
-    # image: wantguns/bin
+    image: wantguns/bin
     container_name: pastebin
     ports:
       - 127.0.0.1:6162:6162
     environment:
-      - ROCKET_PORT=6162  # Port the app uses
-      - HOST_URL=localhost:6162 # or bin.example.com 
+      - ROCKET_PORT=6162
+      - ROCKET_LIMITS={form="16 MiB"}
     volumes:
       - ./upload:/app/upload  # upload folder will have your pastes
