@@ -44,7 +44,8 @@ fn rocket() -> _ {
     let args = get_parsed_args();
 
     // create the upload directory, if not already created
-    fs::create_dir_all(args.upload).expect("Could not create the upload directory");
+    fs::create_dir_all(args.upload)
+        .expect("Could not create the upload directory");
 
     rocket::build()
         .mount(

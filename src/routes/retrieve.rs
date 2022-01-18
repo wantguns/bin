@@ -16,5 +16,6 @@ pub async fn retrieve(id: PasteId<'_>) -> Option<File> {
 pub async fn retrieve_ext(id_ext: PasteIdSyntax<'_>) -> Option<File> {
     // let filename = format!("upload/{id}", id = id_ext.get_fname());
 
-    File::open(get_upload_dir().join(format!("{id}", id = id_ext.get_fname()))).ok()
+    File::open(get_upload_dir().join(format!("{id}", id = id_ext.get_fname())))
+        .ok()
 }

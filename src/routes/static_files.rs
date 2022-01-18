@@ -7,7 +7,9 @@ use std::{borrow::Cow, ffi::OsStr, path::PathBuf};
 struct Static;
 
 #[get("/static/<file..>")]
-pub fn static_files(file: PathBuf) -> Option<(ContentType, Cow<'static, [u8]>)> {
+pub fn static_files(
+    file: PathBuf,
+) -> Option<(ContentType, Cow<'static, [u8]>)> {
     let filename = file.display().to_string();
     let asset = Static::get(&filename)?;
 

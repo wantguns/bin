@@ -8,7 +8,8 @@ use syntect::parsing::SyntaxSet;
 pub fn get_pretty_body(path: &PathBuf, ext: &String) -> String {
     let ss = SyntaxSet::load_defaults_newlines();
 
-    let mut theme_cursor = std::io::Cursor::new(include_bytes!("../../themes/ayu_dark.tmTheme"));
+    let mut theme_cursor =
+        std::io::Cursor::new(include_bytes!("../../themes/ayu_dark.tmTheme"));
     let theme = ThemeSet::load_from_reader(&mut theme_cursor).unwrap();
 
     let content = fs::read_to_string(path).unwrap();
