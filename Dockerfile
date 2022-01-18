@@ -25,7 +25,7 @@ RUN cargo clean
 ###### Runner Image
 FROM scratch as runner
 COPY --from=builder /app/empty_upload upload
-COPY ./client upload/client
+COPY ./contrib/cli/client upload/client
 COPY ./templates templates
 COPY ./static static
 COPY ./themes themes
