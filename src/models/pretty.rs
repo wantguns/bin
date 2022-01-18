@@ -1,10 +1,11 @@
 use std::fs;
+use std::path::PathBuf;
 
 use syntect::highlighting::ThemeSet;
 use syntect::html::highlighted_html_for_string;
 use syntect::parsing::SyntaxSet;
 
-pub fn get_pretty_body(path: &String, ext: &String) -> String {
+pub fn get_pretty_body(path: &PathBuf, ext: &String) -> String {
     let ss = SyntaxSet::load_defaults_newlines();
 
     let mut theme_cursor = std::io::Cursor::new(include_bytes!("../../themes/ayu_dark.tmTheme"));
