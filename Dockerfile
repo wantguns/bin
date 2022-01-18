@@ -2,8 +2,6 @@
 FROM rust as builder
 WORKDIR /app
 COPY . .
-# scratch does not have the mkdir binary, so we create a folder here
-RUN mkdir -p empty_upload
 
 ARG ARCH
 RUN __ARCH="$(dpkg --print-architecture)"; \
@@ -24,15 +22,11 @@ RUN cargo clean
 
 ###### Runner Image
 FROM scratch as runner
-COPY --from=builder /app/empty_upload upload
-COPY ./contrib/cli/client upload/client
-COPY ./templates templates
-COPY ./static static
-COPY ./themes themes
 COPY --from=builder /usr/local/cargo/bin/bin .
 
-ENV ROCKET_ADDRESS=0.0.0.0
-ENV ROCKET_PORT=6162
-
+ENV BIN_ADDRESS=0.0.0.0
+# Some hax required since we are running on scratch
+ENV BIN_TEMPLATE_DIR=upload
 EXPOSE 6162
+
 CMD ["./bin"]

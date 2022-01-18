@@ -3,11 +3,34 @@ extern crate rocket;
 use std::{fs, net::IpAddr, path::PathBuf};
 
 use clap::Parser;
-use rocket::shield::{NoSniff, Shield};
-use rocket_dyn_templates::Template;
+use rocket::{shield::{NoSniff, Shield}, figment::{providers::Env, Figment}};
+use rocket_dyn_templates::{tera::Tera, Template};
+use rust_embed::RustEmbed;
 
 mod models;
 mod routes;
+
+#[derive(RustEmbed)]
+#[folder = "templates/"]
+struct EmbeddedTemplates;
+
+fn setup_tera_engine(tera: &mut Tera) {
+    // Register templates
+    let base_html = EmbeddedTemplates::get("base.html.tera").unwrap();
+    let index_html = EmbeddedTemplates::get("index.html.tera").unwrap();
+    let pretty_html = EmbeddedTemplates::get("pretty.html.tera").unwrap();
+
+    // and shove them in the tera instance
+    tera.add_raw_templates(vec![
+        ("base", std::str::from_utf8(&base_html.data).unwrap()),
+        ("index", std::str::from_utf8(&index_html.data).unwrap()),
+        (
+            "pretty",
+            std::str::from_utf8(&pretty_html.data).unwrap(),
+        ),
+    ])
+    .expect("Could not add raw templates to the tera instance");
+}
 
 /// A minimal, opinionated pastebin
 #[derive(Parser, Debug)]
@@ -22,7 +45,7 @@ pub struct Args {
     port: u16,
 
     /// Address on which the webserver runs
-    #[clap(short, long, default_value = "0.0.0.0")]
+    #[clap(short, long, default_value = "127.0.0.1")]
     address: IpAddr,
 
     /// Binary uploads file size limit (in MiB)
@@ -40,14 +63,21 @@ pub fn get_upload_dir() -> PathBuf {
 
 #[launch]
 fn rocket() -> _ {
-    let shield = Shield::default().disable::<NoSniff>();
     let args = get_parsed_args();
+
+    // Custom Fairings and Providers
+    let shield = Shield::default().disable::<NoSniff>();
+    let figment = Figment::from(rocket::Config::default())
+        .merge(("port", args.port))
+        .merge(("address", args.address))
+        .merge(("template_dir", ".")) // Required if embedding templates
+        .merge(Env::prefixed("BIN_").global());
 
     // create the upload directory, if not already created
     fs::create_dir_all(args.upload)
         .expect("Could not create the upload directory");
 
-    rocket::build()
+    rocket::custom(figment)
         .mount(
             "/",
             routes![
@@ -62,5 +92,7 @@ fn rocket() -> _ {
             ],
         )
         .attach(shield)
-        .attach(Template::fairing())
+        .attach(Template::custom(|engines| {
+            setup_tera_engine(&mut engines.tera)
+        }))
 }

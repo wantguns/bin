@@ -4,9 +4,9 @@ services:
     image: wantguns/bin
     container_name: pastebin
     ports:
-      - 127.0.0.1:6162:6162
+      - 127.0.0.1:6163:6163
     environment:
-      - ROCKET_PORT=6162
-      - ROCKET_LIMITS={form="16 MiB"}
+      - BIN_PORT=6163
+      - BIN_LIMITS={form="16 MiB"}
     volumes:
-      - ./upload:/app/upload  # upload folder will have your pastes
+      - ./upload:/upload  # upload folder will have your pastes
