@@ -16,7 +16,7 @@ setup_cross_compiling() {
 # Building for the given architecture
 build_for_arch() {
     __ARCH=$1
-    __SHA=$2
+    __REF=$2
 
     # Statically compile
     case "$__ARCH" in \
@@ -29,5 +29,5 @@ build_for_arch() {
 
     # Export them artifacts
     mkdir -p artifacts
-    cp -av /home/runner/.cargo/bin/bin "artifacts/bin-$__SHA-$__TARGET"
+    cp -av /home/runner/.cargo/bin/bin "artifacts/bin-$__REF-$__TARGET"
 }

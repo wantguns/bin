@@ -1,12 +1,6 @@
 name: Build CI
 
-on: 
-  push:
-    branches:
-      - "*"
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   build:
@@ -31,8 +25,12 @@ jobs:
 
       - name: Build 
         run: |
+          [ $GITHUB_REF_TYPE = "branch" ] && \
+            export __REF=${GITHUB_SHA::7} || \
+            export __REF=$GITHUB_REF_NAME
+
           source ./.github/buildci.sh
-          build_for_arch ${{ matrix.arch }} ${GITHUB_SHA::7}
+          build_for_arch ${{ matrix.arch }} $__REF
 
       - name: Export artifacts
         uses: actions/upload-artifact@v2
