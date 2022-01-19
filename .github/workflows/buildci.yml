@@ -1,0 +1,41 @@
+name: Build CI
+
+on: 
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix: 
+        arch: [amd64, arm64]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+      
+      - name: Setup cross compiling
+        run: |
+          source ./.github/buildci.sh
+          setup_cross_compiling ${{ matrix.arch }}
+      
+      - name: Format
+        run: cargo fmt -- --check
+
+      - name: Clippy
+        run: cargo clippy -- -Dwarnings
+
+      - name: Build 
+        run: |
+          source ./.github/buildci.sh
+          build_for_arch ${{ matrix.arch }} ${GITHUB_SHA::7}
+
+      - name: Export artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: artifacts
