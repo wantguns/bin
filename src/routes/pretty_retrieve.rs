@@ -16,7 +16,7 @@ pub async fn pretty_retrieve(id: PasteId<'_>) -> Option<Template> {
     let mut map = HashMap::new();
     map.insert("title", id.to_string());
     map.insert("body", contents);
-    let rendered = Template::render("pretty", &map);
+    let rendered = Template::render("pretty.html", &map);
 
     match tree_magic::match_filepath("text/plain", &filepath) {
         true => Some(rendered),

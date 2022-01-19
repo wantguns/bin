@@ -25,8 +25,6 @@ FROM scratch as runner
 COPY --from=builder /usr/local/cargo/bin/bin .
 
 ENV BIN_ADDRESS=0.0.0.0
-# Some hax required since we are running on scratch
-ENV BIN_TEMPLATE_DIR=upload
 EXPOSE 6162
 
 CMD ["./bin"]

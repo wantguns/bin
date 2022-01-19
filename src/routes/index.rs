@@ -6,5 +6,5 @@ use std::collections::HashMap;
 pub async fn index() -> Option<Template> {
     let mut map = HashMap::new();
     map.insert("title", "bin");
-    Some(Template::render("index", &map))
+    Some(Template::render("index.html", &map))
 }

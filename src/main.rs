@@ -22,10 +22,10 @@ fn setup_tera_engine(tera: &mut Tera) {
 
     // and shove them in the tera instance
     tera.add_raw_templates(vec![
-        ("base", std::str::from_utf8(&base_html.data).unwrap()),
-        ("index", std::str::from_utf8(&index_html.data).unwrap()),
+        ("base.html", std::str::from_utf8(&base_html.data).unwrap()),
+        ("index.html", std::str::from_utf8(&index_html.data).unwrap()),
         (
-            "pretty",
+            "pretty.html",
             std::str::from_utf8(&pretty_html.data).unwrap(),
         ),
     ])
@@ -68,13 +68,13 @@ fn rocket() -> _ {
     // Custom Fairings and Providers
     let shield = Shield::default().disable::<NoSniff>();
     let figment = Figment::from(rocket::Config::default())
-        .merge(("port", args.port))
-        .merge(("address", args.address))
-        .merge(("template_dir", ".")) // Required if embedding templates
+        .merge(("port", &args.port))
+        .merge(("address", &args.address))
+        .merge(("template_dir", &args.upload)) // Required if embedding templates
         .merge(Env::prefixed("BIN_").global());
 
     // create the upload directory, if not already created
-    fs::create_dir_all(args.upload)
+    fs::create_dir_all(&args.upload)
         .expect("Could not create the upload directory");
 
     rocket::custom(figment)
