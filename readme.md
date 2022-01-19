@@ -193,6 +193,6 @@ BIN_IDENT=false
 This pastebin: 
 
 - does not use a database. It lacks non-essential features like password-protection / automatic deletion as a result of which, it can do completely fine with flat filesystems. As an upside (opinionated), it makes deploying it easier.
-- uses server sided highlighting, which ensures that everything stays light and snappy at the server side.
+- uses server sided highlighting, which ensures that everything stays light and snappy at the client side.
 - uses very minimal frontend because a pastebin does not need it. It focuses (or atleast tries to) on getting things done in minimum amount of clicks.
 
