@@ -18,11 +18,15 @@ You can paste
 
 - Normal Text
 
-- Paste Images from clipboard
+- Paste Images from clipboard:  
+![clipboard-paste](.github/files/image_clipboard.gif)
 
-- Files by drag and drop
+- Files by drag and drop:  
+![drag_n_drop](.github/files/drag_n_drop.gif)
 
 ### CLI
+
+[![cli-usage](https://asciinema.org/a/khcEtveMAbjqJccySdmWuPe1l.svg)](https://asciinema.org/a/khcEtveMAbjqJccySdmWuPe1l)
 
 #### Installation
 
@@ -83,7 +87,16 @@ Currently, builds for the following target triples are shipped:
 - x86_64-unknown-linux-gnu (amd64)
 - aarch64-unknown-linux-gnu (arm64)
 
-The builds shipped are statically linked, so you don't even need a libc to run the binary !
+The builds shipped are statically linked, so you don't even need a libc to run the binary !  
+The docker manifest labelled
+[`wantguns/bin:latest`](https://hub.docker.com/layers/wantguns/bin/latest/images/sha256-34c19b59d098bd1420fc48f6b1f01dc250d3d8787a3786f5425efb4e74cc17f2?context=repo)
+includes the images for both amd64 and arm64 images.
+
+### Docker
+
+```bash
+$ docker run -p 6162:6162 wantguns/bin
+```
 
 ### Docker Compose
 
@@ -94,18 +107,12 @@ services:
     image: wantguns/bin
     container_name: pastebin
     ports:
-      - 127.0.0.1:6162:6162
+      - 127.0.0.1:6163:6163
     environment:
-      - BIN_PORT=6162
+      - BIN_PORT=6163 # Defaults to 6162
       - BIN_LIMITS={form="16 MiB"}
     volumes:
       - ./upload:/upload  # upload folder will have your pastes
-```
-
-### Docker
-
-```bash
-$ docker run -p 6162:6162 wantguns/bin
 ```
 
 ### Manual
