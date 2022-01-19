@@ -8,7 +8,7 @@ pub struct PasteIdSyntax<'a> {
 
 fn valid_syn(syn: &str) -> bool {
     let mut flag = false;
-    let split: Vec<&str> = syn.split(".").collect();
+    let split: Vec<&str> = syn.split('.').collect();
     if split.len() == 2 {
         for s in split {
             if s.chars().all(char::is_alphanumeric) {
@@ -22,10 +22,10 @@ fn valid_syn(syn: &str) -> bool {
 
 impl<'a> PasteIdSyntax<'a> {
     pub fn get_fname(&self) -> &str {
-        &self.syn_id.split(".").collect::<Vec<&str>>()[0]
+        self.syn_id.split('.').collect::<Vec<&str>>()[0]
     }
     pub fn get_ext(&self) -> &str {
-        &self.syn_id.split(".").collect::<Vec<&str>>()[1]
+        self.syn_id.split('.').collect::<Vec<&str>>()[1]
     }
 }
 

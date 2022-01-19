@@ -1,11 +1,11 @@
 use std::fs;
-use std::path::PathBuf;
+use std::path::Path;
 
 use syntect::highlighting::ThemeSet;
 use syntect::html::highlighted_html_for_string;
 use syntect::parsing::SyntaxSet;
 
-pub fn get_pretty_body(path: &PathBuf, ext: &String) -> String {
+pub fn get_pretty_body(path: &Path, ext: &str) -> String {
     let ss = SyntaxSet::load_defaults_newlines();
 
     let mut theme_cursor =
@@ -16,7 +16,6 @@ pub fn get_pretty_body(path: &PathBuf, ext: &String) -> String {
     let syntax = ss
         .find_syntax_by_token(ext)
         .unwrap_or_else(|| ss.find_syntax_plain_text());
-    let html = highlighted_html_for_string(&content, &ss, syntax, &theme);
 
-    html
+    highlighted_html_for_string(&content, &ss, syntax, &theme)
 }

@@ -14,7 +14,7 @@ pub async fn pretty_retrieve_ext(
     let id = id_ext.get_fname();
     let ext = id_ext.get_ext();
 
-    let filepath = Path::new(&get_upload_dir()).join(format!("{id}", id = id));
+    let filepath = Path::new(&get_upload_dir()).join(id.to_string());
 
     let contents = get_pretty_body(&filepath, &ext.to_string());
 

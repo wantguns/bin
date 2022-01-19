@@ -3,7 +3,10 @@ extern crate rocket;
 use std::{fs, net::IpAddr, path::PathBuf};
 
 use clap::Parser;
-use rocket::{shield::{NoSniff, Shield}, figment::{providers::Env, Figment}};
+use rocket::{
+    figment::{providers::Env, Figment},
+    shield::{NoSniff, Shield},
+};
 use rocket_dyn_templates::{tera::Tera, Template};
 use rust_embed::RustEmbed;
 
