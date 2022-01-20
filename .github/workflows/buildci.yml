@@ -3,7 +3,21 @@ name: Build CI
 on: [push, pull_request]
 
 jobs:
+  pre-build-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Format
+        run: cargo fmt -- --check
+
+      - name: Clippy
+        run: cargo clippy -- -Dwarnings
+      
+      
   build:
+    needs: pre-build-checks
     strategy:
       matrix: 
         arch: [amd64, arm64]
@@ -17,12 +31,6 @@ jobs:
           source ./.github/buildci.sh
           setup_cross_compiling ${{ matrix.arch }}
       
-      - name: Format
-        run: cargo fmt -- --check
-
-      - name: Clippy
-        run: cargo clippy -- -Dwarnings
-
       - name: Build 
         run: |
           [ $GITHUB_REF_TYPE = "branch" ] && \
