@@ -22,8 +22,6 @@ ROUTES
            Get highlighted pastes 
        GET /p/<id>.<ext> 
            Get syntax highlighted pastes. 
-           E.g. https://bin.wantguns.dev/p/foobaz.cpp should return a C++ syntax
-           highlighted paste
 
 WEB USAGE
        Drag a file and drop it here, or
@@ -37,8 +35,6 @@ CLI USAGE
 SEE ALSO
        github.com/wantguns/bin
 
-AUTHOR
-       Gunwant Jain
 " autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
         </div>
         <div class="selectBox">

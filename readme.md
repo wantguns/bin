@@ -8,7 +8,7 @@ It does not require you to host a SQL server and everything is self-contained in
 a statically linked binary (the docker image runs on scratch !), which makes it
 extremely easy to deploy.
 
-Try it out on: https://bin.wantguns.dev
+Try it out on: https://basedbin.fly.dev
 
 ## Clients
 
@@ -43,7 +43,7 @@ or manually copy the following at a file in your path.
 #!/bin/bash
 
 # Change the url accordingly
-URL="https://bin.wantguns.dev"
+URL="https://basedbin.fly.dev"
 
 FILEPATH="$1"
 FILENAME=$(basename -- "$FILEPATH")
@@ -182,7 +182,7 @@ BIN_IDENT=false
 `GET /p/<id>.<ext> `  
 
   Get syntax highlighted pastes.  
-  E.g. https://bin.wantguns.dev/p/foobaz.cpp should return a C++ syntax
+  E.g. https://basedbin.fly.dev/p/foobaz.cpp should return a C++ syntax
   highlighted paste
 
 `POST /`  
