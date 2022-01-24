@@ -1,12 +1,8 @@
-{% extends "base.html" %}
-
-{% block styles %}
-<link rel="stylesheet" href="/static/css/index.css">
-{% endblock styles %}
-
-{% block body %}
+{% extends "base.html" %} {% block styles %}
+<link rel="stylesheet" href="/static/css/index.css" />
+{% endblock styles %} {% block body %}
 <form action="/submit" method="post" ondrop="dropHandler(event)">
-    <div class=grid_form>
+    <div class="grid_form">
         <div class="textareaBox">
             <textarea name="content" id="textarea_content" style="resize: none" placeholder="
 
@@ -34,77 +30,172 @@ CLI USAGE
 
 SEE ALSO
        github.com/wantguns/bin
-
 " autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
         </div>
         <div class="selectBox">
             <select id="ext" name="ext" size="15">
-                <option selected value="txt">Plain Text</option>
+                <option value="txt">Plain Text</option>
+                <option value=".env">DotENV</option>
+                <option value=".git">Git Link</option>
+                <option value=".mailmap">Git Mailmap</option>
+                <option value="CMakeCache.txt">CMakeCache</option>
+                <option value="CMakeLists.txt">CMake</option>
+                <option value="COMMIT_EDITMSG">Git Commit</option>
+                <option value="Dockerfile">Dockerfile</option>
+                <option value="R">R</option>
+                <option value="adoc">AsciiDoc (Asciidoctor)</option>
+                <option value="adp">HTML (Tcl)</option>
+                <option value="applescript">AppleScript</option>
+                <option value="as">ActionScript</option>
                 <option value="asa">ASP</option>
                 <option value="asp">HTML (ASP)</option>
-                <option value="as">ActionScript</option>
-                <option value="applescript">AppleScript</option>
+                <option value="attributes">Git Attributes</option>
+                <option value="authorized_keys">Authorized Keys</option>
+                <option value="awk">AWK</option>
                 <option value="bat">Batch File</option>
-                <option value="build">NAnt Build File</option>
-                <option value="cs">C#</option>
-                <option value="cpp">C++</option>
-                <option value="c">C</option>
-                <option value="css">CSS</option>
-                <option value="clj">Clojure</option>
-                <option value="d">D</option>
-                <option value="diff">Diff</option>
-                <option value="erl">Erlang</option>
-                <option value="yaws">HTML (Erlang)</option>
-                <option value="go">Go</option>
-                <option value="dot">Graphviz (DOT)</option>
-                <option value="groovy">Groovy</option>
-                <option value="html">HTML</option>
-                <option value="hs">Haskell</option>
-                <option value="lhs">Literate Haskell</option>
-                <option value="jsp">Java Server Page (JSP)</option>
-                <option value="java">Java</option>
-                <option value="properties">Java Properties</option>
-                <option value="json">JSON</option>
-                <option value="js">JavaScript</option>
                 <option value="bib">BibTeX</option>
-                <option value="tex">LaTeX</option>
-                <option value="sty">TeX</option>
+                <option value="build">NAnt Build File</option>
+                <option value="c">C</option>
+                <option value="cabal">Cabal</option>
+                <option value="clj">Clojure</option>
+                <option value="coffee">CoffeeScript</option>
+                <option value="conf.erb">nginx</option>
+                <option value="cpp">C++</option>
+                <option value="cpuinfo">CpuInfo</option>
+                <option value="cr">Crystal</option>
+                <option value="cs">C#</option>
+                <option value="css">CSS</option>
+                <option value="csv">Comma Separated Values</option>
+                <option value="d">D</option>
+                <option value="dart">Dart</option>
+                <option value="diff">Diff</option>
+                <option value="dot">Graphviz (DOT)</option>
+                <option value="elm">Elm</option>
+                <option value="eml">Email</option>
+                <option value="envvars">Apache Conf</option>
+                <option value="erbsql">SQL (Rails)</option>
+                <option value="erl">Erlang</option>
+                <option value="ex">Elixir</option>
+                <option value="ex.re">Regular Expressions (Elixir)</option>
+                <option value="exclude">Git Ignore</option>
+                <option value="f">Fortran (Fixed Form)</option>
+                <option value="f90">Fortran (Modern)</option>
+                <option value="fish">Friendly Interactive Shell (fish)</option>
+                <option value="fs">F#</option>
+                <option value="fstab">fstab</option>
+                <option value="git-rebase-todo">Git Rebase Todo</option>
+                <option value="gitconfig">Git Config</option>
+                <option value="gitlog">Git Log</option>
+                <option value="go">Go</option>
+                <option value="gp">gnuplot</option>
+                <option value="graphql">GraphQL</option>
+                <option value="groovy">Groovy</option>
+                <option value="group">group</option>
+                <option value="h.in">CMake C Header</option>
+                <option value="haml">Ruby Haml</option>
+                <option value="hh.in">CMake C++ Header</option>
+                <option value="hosts">hosts</option>
+                <option value="hs">Haskell</option>
+                <option value="htm.j2">HTML (Jinja2)</option>
+                <option value="html">HTML</option>
+                <option value="html.eex">HTML (EEx)</option>
+                <option value="ini">INI</option>
+                <option value="j2">Jinja2</option>
+                <option value="java">Java</option>
+                <option value="jl">Julia</option>
+                <option value="js">JavaScript</option>
+                <option value="js">JavaScript (Babel)</option>
+                <option value="js.erb">JavaScript (Rails)</option>
+                <option value="json">JSON</option>
+                <option value="jsonnet">jsonnet</option>
+                <option value="jsp">Java Server Page (JSP)</option>
+                <option value="known_hosts">Known Hosts</option>
+                <option value="kt">Kotlin</option>
+                <option value="lean">Lean</option>
+                <option value="less">Less</option>
+                <option value="lhs">Literate Haskell</option>
                 <option value="lisp">Lisp</option>
+                <option value="log">log</option>
                 <option value="lua">Lua</option>
+                <option value="m">Objective-C</option>
                 <option value="make">Makefile</option>
-                <option value="md">Markdown</option>
+                <option value="man">Manpage</option>
                 <option value="matlab">MATLAB</option>
+                <option value="md">Markdown</option>
+                <option value="meminfo">MemInfo</option>
                 <option value="ml">OCaml</option>
                 <option value="mll">OCamllex</option>
                 <option value="mly">OCamlyacc</option>
                 <option value="mm">Objective-C++</option>
-                <option value="m">Objective-C</option>
-                <option value="php">PHP</option>
+                <option value="namelist">Fortran Namelist</option>
+                <option value="nim">Nim</option>
+                <option value="ninja">Ninja</option>
+                <option value="nix">Nix</option>
+                <option value="org">orgmode</option>
                 <option value="pas">Pascal</option>
+                <option value="passwd">passwd</option>
+                <option value="pb.txt">Protocol Buffer (TEXT)</option>
+                <option value="php">PHP</option>
                 <option value="pl">Perl</option>
+                <option value="pp">Puppet</option>
+                <option value="properties">Java Properties</option>
+                <option value="proto">Protocol Buffer</option>
+                <option value="ps1">PowerShell</option>
+                <option value="purs">PureScript</option>
                 <option value="py">Python</option>
-                <option value="R">R</option>
-                <option value="rd">Rd (R Documentation)</option>
+                <option value="qml">QML</option>
                 <option value="rails">HTML (Rails)</option>
-                <option value="js.erb">JavaScript (Rails)</option>
-                <option value="haml">Ruby Haml</option>
-                <option value="rxml">Ruby on Rails</option>
-                <option value="erbsql">SQL (Rails)</option>
-                <option value="re">Regular Expression</option>
-                <option value="rst">reStructuredText</option>
                 <option value="rb">Ruby</option>
+                <option value="rd">Rd (R Documentation)</option>
+                <option value="re">Regular Expression</option>
+                <option value="rego">Rego</option>
+                <option value="requirements.txt">requirements.txt</option>
+                <option value="resolv.conf">resolv</option>
+                <option value="robot">Robot Framework</option>
                 <option value="rs">Rust</option>
-                <option value="sql">SQL</option>
+                <option value="rst">reStructuredText</option>
+                <option value="rxml">Ruby on Rails</option>
+                <option value="s">ARM Assembly</option>
+                <option value="sass">Sass</option>
                 <option value="scala">Scala</option>
+                <option value="scss">SCSS</option>
                 <option value="sh">Bourne Again Shell (bash)</option>
-                <option value="adp">HTML (Tcl)</option>
+                <option value="show-nonprintable">Highlight non-printables</option>
+                <option value="sls">Salt State (SLS)</option>
+                <option value="sml">SML</option>
+                <option value="sol">Solidity</option>
+                <option value="sql">SQL</option>
+                <option value="ssh_config">SSH Config</option>
+                <option value="sshd_config">SSHD Config</option>
+                <option value="strace">Strace</option>
+                <option value="sty">TeX</option>
+                <option value="styl">Stylus</option>
+                <option value="sv">SystemVerilog</option>
+                <option value="svlt">Svelte</option>
+                <option value="swift">Swift</option>
+                <option value="syslog">syslog</option>
                 <option value="tcl">Tcl</option>
+                <option value="tex">LaTeX</option>
                 <option value="textile">Textile</option>
+                <option value="tf">Terraform</option>
+                <option value="tfstate">JSON (Terraform)</option>
+                <option value="toml">TOML</option>
+                <option value="ts">TypeScript</option>
+                <option value="tsx">TypeScriptReact</option>
+                <option value="twig">HTML (Twig)</option>
+                <option value="v">Verilog</option>
+                <option value="varlink">varlink</option>
+                <option value="vim">VimL</option>
+                <option value="vs">GLSL</option>
+                <option value="vue">Vue Component</option>
+                <option value="vy">Vyper</option>
                 <option value="xml">XML</option>
                 <option value="yaml">YAML</option>
+                <option value="yasm">Assembly (x86_64)</option>
+                <option value="yaws">HTML (Erlang)</option>
+                <option value="zig">Zig</option>
             </select>
         </div>
-
         <div class="submitButtonBox">
             <button type="submit" title="Paste">Paste</button>
         </div>

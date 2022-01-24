@@ -5,11 +5,15 @@ use syntect::highlighting::ThemeSet;
 use syntect::html::highlighted_html_for_string;
 use syntect::parsing::SyntaxSet;
 
-pub fn get_pretty_body(path: &Path, ext: &str) -> String {
-    let ss = SyntaxSet::load_defaults_newlines();
+static SYNTAXES: &[u8] =
+    include_bytes!("../../resources/syntaxes/syntaxes.bin");
+static THEMES: &[u8] =
+    include_bytes!("../../resources/themes/ayu_dark.tmTheme");
 
-    let mut theme_cursor =
-        std::io::Cursor::new(include_bytes!("../../themes/ayu_dark.tmTheme"));
+pub fn get_pretty_body(path: &Path, ext: &str) -> String {
+    let ss: SyntaxSet = syntect::dumps::from_binary(SYNTAXES);
+
+    let mut theme_cursor = std::io::Cursor::new(THEMES);
     let theme = ThemeSet::load_from_reader(&mut theme_cursor).unwrap();
 
     let content = fs::read_to_string(path).unwrap();
