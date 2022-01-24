@@ -34,7 +34,7 @@ SEE ALSO
         </div>
         <div class="selectBox">
             <select id="ext" name="ext" size="15">
-                <option value="txt">Plain Text</option>
+                <option selected value="txt">Plain Text</option>
                 <option value=".env">DotENV</option>
                 <option value=".git">Git Link</option>
                 <option value=".mailmap">Git Mailmap</option>
