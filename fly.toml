@@ -7,9 +7,6 @@ processes = []
 [build]
   image = "wantguns/bin"
 
-[env]
-  BIN_LIMITS={form="16 MiB"}
-
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
