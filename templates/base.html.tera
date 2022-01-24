@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/static/media/favicon-16x16.png" />
   <link rel="icon" type="image/x-icon" href="/static/media/favicon.ico" />
 
-  <link href="https://pvinis.github.io/iosevka-webfont/3.4.1/iosevka.css" rel="stylesheet" />
+  <link href="/static/fonts/iosevka.css" rel="stylesheet" />
 
   <title>{{ title }}</title>
 
