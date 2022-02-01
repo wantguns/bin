@@ -1,12 +1,9 @@
 # Bin 
 A minimal pastebin which also accepts binary files like Images, PDFs and ships
-multiple clients. 
+multiple clients.
 
 It does not require you to host a SQL server and everything is self-contained in
-a statically linked binary (the docker image runs on scratch !), which makes it
-extremely easy to deploy.
-
-Try it out on: https://basedbin.fly.dev
+a statically linked binary, which makes it extremely easy to deploy.
 
 ## Clients
 
@@ -31,8 +28,7 @@ You can paste
 Get the client from [this repository](contrib/cli/client) or from my deployed paste:
 
 ```bash
-curl -o pst https://bin.wantguns.dev/client
-chmod +x pst
+curl -o pst https://bin.noracodes.dev/r/client && chmod +x pst
 ```
 
 or manually copy the following at a file in your path.
@@ -41,7 +37,7 @@ or manually copy the following at a file in your path.
 #!/bin/bash
 
 # Change the url accordingly
-URL="https://basedbin.fly.dev"
+URL="https://bin.nora.codes"
 
 FILEPATH="$1"
 FILENAME=$(basename -- "$FILEPATH")
@@ -83,47 +79,12 @@ nnoremap <leader>p :!pst %<CR>
 
 Use `<leader> + p` paste.
 
-
 ## Server Deployment
 
-Currently, builds for the following target triples are shipped:
-- x86_64-unknown-linux-gnu (amd64)
-- aarch64-unknown-linux-gnu (arm64)
-
-The builds shipped are statically linked, so you don't even need a libc to run
-the binary !  
-The docker manifest labelled
-[`wantguns/bin:latest`](https://hub.docker.com/layers/wantguns/bin/latest/images/sha256-34c19b59d098bd1420fc48f6b1f01dc250d3d8787a3786f5425efb4e74cc17f2?context=repo)
-includes the images for both amd64 and arm64 images.
-
-### Docker
-
-```bash
-$ docker run -p 6162:6162 wantguns/bin
-```
-
-### Docker Compose
-
-```yaml
-version: '3.3'
-services:
-  pastebin:
-    image: wantguns/bin
-    container_name: pastebin
-    ports:
-      - 127.0.0.1:6163:6163
-    environment:
-      - BIN_PORT=6163 # Defaults to 6162
-      - BIN_LIMITS={form="16 MiB"}
-      - BIN_CLIENT_DESC=placeholder
-    volumes:
-      - ./upload:/upload  # upload folder will have your pastes
-```
+The [main fork](https://github.com/wantguns/bin) ships Docker and binary releases.
 
 ### Manual
 
-- Grab a copy of the binary from GH releases   
-OR
 - Build on your own:
 ```bash
 # A statically linked build
@@ -182,23 +143,22 @@ BIN_IDENT=false
 ...
 ```
 
-
 ## API
 
-`GET /<id>`  
+`GET /r/<id>[.<ext>]`
   Get raw pastes
 
 `GET /p/<id>`  
-  Get highlighted pastes 
+  Get pastes with a pretty UI
 
 `GET /p/<id>.<ext> `  
 
-  Get syntax highlighted pastes.  
-  E.g. https://basedbin.fly.dev/p/foobaz.cpp should return a C++ syntax
+  Get syntax highlighted pastes in the pretty UI.
+  E.g. https://bin.nora.codes/p/foobaz.cpp should return a C++ syntax
   highlighted paste
 
-`POST /`  
-  Post binary data
+`POST /`
+  Post binary data, get object ID
 
 ## Design Decisions
 

@@ -1,7 +1,10 @@
 [package]
 name = "bin"
-version = "2.2.1"
-authors = ["Gunwant Jain <mail@wantguns.dev>"]
+version = "2.2.1-noracodes-02"
+authors = [
+  "Gunwant Jain <mail@wantguns.dev>",
+  "Leonora Tindall <nora@nora.codes>"
+]
 edition = "2021"
 build = "build.rs"
 

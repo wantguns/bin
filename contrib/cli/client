@@ -1,7 +1,14 @@
 #!/bin/bash
 
+# Install by:
+# $ curl -o pst https://bin.wantguns.dev/client && chmod +x pst
+#
+# Usage:
+# $ pst somefile.txt
+# $ cat someimage.png | pst
+
 # Change the url accordingly
-URL="https://basedbin.fly.dev"
+URL="https://bin.nora.codes"
 
 FILEPATH="$1"
 FILENAME=$(basename -- "$FILEPATH")

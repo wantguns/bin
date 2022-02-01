@@ -12,7 +12,9 @@ NAME
        bin - A highly opinionated and minamalistic Pastebin
 
 ROUTES
-       GET /r/<id>
+       GET /
+           Show this page
+       GET /r/<id>[.<ext>]
            Get raw pastes
        GET /p/<id> 
            Get highlighted pastes 
@@ -26,10 +28,11 @@ WEB USAGE
        Just press Ctrl + Enter once done typing.
 {% if client_desc %}
 CLI USAGE
-       Client available at /client
+       Client available at /r/client
 {% endif %}
 SEE ALSO
        github.com/wantguns/bin
+       (noracodes fork, github.com/noracodes/bin)
 " autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
         </div>
         <div class="selectBox">
