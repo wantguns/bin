@@ -12,7 +12,7 @@ NAME
        bin - A highly opinionated and minamalistic Pastebin
 
 ROUTES
-       GET /<id>
+       GET /r/<id>
            Get raw pastes
        GET /p/<id> 
            Get highlighted pastes 

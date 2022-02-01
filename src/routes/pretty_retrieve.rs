@@ -48,7 +48,7 @@ pub async fn pretter_retrieve_inner(
         Ok(v) => v,
         Err(e) if e.kind() == InvalidData => {
             return ResponseWrapper::redirect(Redirect::permanent(format!(
-                "/{}",
+                "/r/{}",
                 id
             )));
         }
