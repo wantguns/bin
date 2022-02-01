@@ -22,7 +22,7 @@ span {
   user-select: none;
 }
 
-.topRightBox button {
+.topRightBox button, .topRightBox a {
   color: inherit;
   background-color: inherit;
   margin: 0px 5px;
@@ -32,6 +32,7 @@ span {
   font-size: inherit;
   line-height: inherit;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .topRightBox button:hover {

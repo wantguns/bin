@@ -28,6 +28,7 @@
         <button id="wrapBtn" onclick="wrapClicked()">&#9166; Wrap</button>
         <button id="forkBtn" onclick="forkClicked()">&#x2442; Fork</button>
         <button id="newPasteBtn" onclick="newPasteClicked()">&#43; New</button>
+        <a href="/r/{{title}}">&#128463; Show Raw</a>
     </div>
 </div>
 
