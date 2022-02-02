@@ -1,5 +1,3 @@
-
-
 # Bin 
 A minimal pastebin which also accepts binary files like Images, PDFs and ships
 multiple clients. 
@@ -87,7 +85,8 @@ Currently, builds for the following target triples are shipped:
 - x86_64-unknown-linux-gnu (amd64)
 - aarch64-unknown-linux-gnu (arm64)
 
-The builds shipped are statically linked, so you don't even need a libc to run the binary !  
+The builds shipped are statically linked, so you don't even need a libc to run
+the binary !  
 The docker manifest labelled
 [`wantguns/bin:latest`](https://hub.docker.com/layers/wantguns/bin/latest/images/sha256-34c19b59d098bd1420fc48f6b1f01dc250d3d8787a3786f5425efb4e74cc17f2?context=repo)
 includes the images for both amd64 and arm64 images.
@@ -158,9 +157,13 @@ OPTIONS:
 
 #### Configuration
 
-This pastebin utilizes a custom configuration provider from Rocket. Apart from the essential arguments, you can also use environment variables, which have the highest preference in order.
+This pastebin utilizes a custom configuration provider from Rocket. Apart from
+the essential arguments, you can also use environment variables, which have the
+highest preference in order.
 
-Everything from the [official Rocket doc](https://rocket.rs/v0.5-rc/guide/configuration/#overview) is supported, just that you have to prefix the env variable with "BIN_":
+Everything from the [official Rocket
+doc](https://rocket.rs/v0.5-rc/guide/configuration/#overview) is supported,
+just that you have to prefix the env variable with "BIN_":
 ```txt
 BIN_PORT=6163
 BIN_ADDRESS=0.0.0.0
@@ -192,17 +195,27 @@ BIN_IDENT=false
 
 This pastebin: 
 
-- does not use a database. It lacks non-essential features like password-protection / automatic deletion as a result of which, it can do completely fine with flat filesystems. As an upside (opinionated), it makes deploying it easier.
-- uses server sided highlighting, which ensures that everything stays light and snappy at the client side.
-- uses very minimal frontend because a pastebin does not need it. It focuses (or atleast tries to) on getting things done in minimum amount of clicks.
+- does not use a database. It lacks non-essential features like
+  password-protection / automatic deletion as a result of which, it can do
+  completely fine with flat filesystems. As an upside (opinionated), it makes
+  deploying it easier.
+- uses server sided highlighting, which ensures that everything stays light and
+  snappy at the client side.
+- uses very minimal frontend because a pastebin does not need it. It focuses
+  (or atleast tries to) on getting things done in minimum amount of clicks.
 
 ## Hacking
 
-If you want to ensure your pushed refs will pass CI, add the prepush script to your Git hooks:
+- If you want to ensure your pushed refs will pass CI, add the prepush script
+  to your Git hooks:
 
-```bash
-$ cat tools/prepush >> .git/hooks/pre-push
-```
+  ```bash
+  $ cat tools/prepush >> .git/hooks/pre-push
+  ```
 
-Alternately, just run `./tools/prepush` yourself before pushing.
+  Alternately, just run `./tools/prepush` yourself before pushing.
 
+- The Cargo configuration for this project is set for statically compiled
+  builds. You can check out the [config file](.cargo/config.toml) to know more.
+- Read the [buildci](.github/workflows/buildci.yml) to know how the project is
+  statically compiled for two architectures.
