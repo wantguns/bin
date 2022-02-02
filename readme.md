@@ -196,3 +196,13 @@ This pastebin:
 - uses server sided highlighting, which ensures that everything stays light and snappy at the client side.
 - uses very minimal frontend because a pastebin does not need it. It focuses (or atleast tries to) on getting things done in minimum amount of clicks.
 
+## Hacking
+
+If you want to ensure your pushed refs will pass CI, add the prepush script to your Git hooks:
+
+```bash
+$ cat tools/prepush >> .git/hooks/pre-push
+```
+
+Alternately, just run `./tools/prepush` yourself before pushing.
+
