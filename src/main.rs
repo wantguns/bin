@@ -3,6 +3,7 @@ extern crate rocket;
 use std::{fs, net::IpAddr, path::PathBuf};
 
 use clap::Parser;
+use once_cell::sync::Lazy;
 use rocket::{
     figment::{providers::Env, Figment},
     shield::{NoSniff, Shield},
@@ -12,6 +13,18 @@ use rust_embed::RustEmbed;
 
 mod models;
 mod routes;
+
+const BINARY_VERSION: &str =
+    concat!(env!("CARGO_PKG_VERSION"), env!("GIT_HASH"));
+const SERVER_VERSION: &str = concat!(
+    "bin v.",
+    env!("CARGO_PKG_VERSION"),
+    " (",
+    env!("GIT_HASH"),
+    ") (Rocket)"
+);
+static BINARY_ETAG: Lazy<String> =
+    Lazy::new(|| sha256::digest(BINARY_VERSION));
 
 #[derive(RustEmbed)]
 #[folder = "templates/"]
@@ -91,7 +104,7 @@ fn rocket() -> _ {
                 routes::retrieve::retrieve,
                 routes::retrieve::retrieve_ext,
                 routes::pretty_retrieve::pretty_retrieve,
-                routes::pretty_retrieve_ext::pretty_retrieve_ext
+                routes::pretty_retrieve::pretty_retrieve_ext
             ],
         )
         .attach(shield)
