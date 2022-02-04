@@ -3,6 +3,7 @@ name = "bin"
 version = "2.0.0"
 authors = ["Gunwant Jain <mail@wantguns.dev>"]
 edition = "2021"
+build = "build.rs"
 
 [dependencies]
 rand = "0.8.4"
@@ -11,6 +12,9 @@ tree_magic = "0.2.3"
 syntect = "4.6.0"
 rust-embed="6.3.0"
 clap = { version = "3.0.9", features = ["derive"] }
+once_cell = "1"
+sha256 = "1"
+time = { version = "0.3", features = ["formatting"] }
 
 [dependencies.rocket_dyn_templates]
 version = "0.1.0-rc.1"
