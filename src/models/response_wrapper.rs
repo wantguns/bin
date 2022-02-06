@@ -8,7 +8,8 @@ use std::time::SystemTime;
 
 pub enum ResponseWrapper<R> {
     MetaInterfaceResponse(R),
-    PasteContentResponse(R, SystemTime),
+    PrettyPasteContentResponse(R, SystemTime),
+    RawPasteContentResponse(R, SystemTime),
     Redirect(Box<Redirect>),
     NotFound(String),
     ServerError(String),
@@ -19,8 +20,12 @@ impl<'r, 'o: 'r, R: Responder<'r, 'o>> ResponseWrapper<R> {
         Self::MetaInterfaceResponse(responder)
     }
 
-    pub fn paste_response(responder: R, modified: SystemTime) -> Self {
-        Self::PasteContentResponse(responder, modified)
+    pub fn pretty_paste_response(responder: R, modified: SystemTime) -> Self {
+        Self::PrettyPasteContentResponse(responder, modified)
+    }
+
+    pub fn raw_paste_response(responder: R, modified: SystemTime) -> Self {
+        Self::RawPasteContentResponse(responder, modified)
     }
 
     pub fn redirect(redirect: Redirect) -> Self {
@@ -51,15 +56,31 @@ impl<'r, 'o: 'r, R: Responder<'r, 'o>> Responder<'r, 'o>
             MetaInterfaceResponse(sup) => response
                 .join(sup.respond_to(request)?)
                 .raw_header("ETag", &*crate::BINARY_ETAG)
+                .raw_header(
+                    "Cache-Control",
+                    "max-age=604800, stale-while-revalidate=86400",
+                )
                 .ok(),
-            PasteContentResponse(sup, modified) => response
+
+            PrettyPasteContentResponse(sup, modified) => response
                 .join(sup.respond_to(request)?)
                 .raw_header("Last-Modified", http_strftime(modified))
+                .raw_header(
+                    "Cache-Control",
+                    "max-age=604800, stale-while-revalidate=86400",
+                )
                 .ok(),
+
+            RawPasteContentResponse(sup, modified) => response
+                .join(sup.respond_to(request)?)
+                .raw_header("Last-Modified", http_strftime(modified))
+                .raw_header("Cache-Control", "max-age=604800, immutable")
+                .ok(),
+
             Redirect(sup) => response.join(sup.respond_to(request)?).ok(),
+
             NotFound(s) => {
                 let body = format!("Unable to find entity '{}'", s);
-
                 response
                     .sized_body(body.len(), Cursor::new(body))
                     .status(Status::NotFound)

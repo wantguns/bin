@@ -42,5 +42,5 @@ pub async fn retrieve_inner(id: &str) -> ResponseWrapper<File> {
         }
     };
 
-    ResponseWrapper::paste_response(file, modified_date)
+    ResponseWrapper::raw_paste_response(file, modified_date)
 }

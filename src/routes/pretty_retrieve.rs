@@ -66,7 +66,9 @@ pub async fn pretter_retrieve_inner(
     let rendered = Template::render("pretty.html", &map);
 
     match tree_magic::match_filepath("text/plain", &filepath) {
-        true => ResponseWrapper::paste_response(rendered, modified_date),
+        true => {
+            ResponseWrapper::pretty_paste_response(rendered, modified_date)
+        }
         false => ResponseWrapper::server_error("media type unacceptable"),
     }
 }
