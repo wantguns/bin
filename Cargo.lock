@@ -98,7 +98,7 @@ checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
 
 [[package]]
 name = "bin"
-version = "2.0.0"
+version = "2.2.0"
 dependencies = [
  "clap",
  "once_cell",
