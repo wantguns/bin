@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "[prepush] Running cargo fmt --check"
-cargo fmt -- --check
+echo "[prepush] Running cargo fmt"
+cargo fmt
 echo "[prepush] Running cargo clippy"
 cargo clippy -- -Dwarnings 

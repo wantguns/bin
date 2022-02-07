@@ -210,7 +210,7 @@ This pastebin:
   to your Git hooks:
 
   ```bash
-  $ cat tools/prepush >> .git/hooks/pre-push
+  $ cp -a tools/prepush .git/hooks/pre-push
   ```
 
   Alternately, just run `./tools/prepush` yourself before pushing.
