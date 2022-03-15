@@ -15,11 +15,11 @@ pub async fn retrieve(id: PasteId<'_>) -> ResponseWrapper<File> {
 // rank 1 here because this would be more oftenly used
 #[get("/<id_ext>", rank = 1)]
 pub async fn retrieve_ext(id_ext: PasteIdSyntax<'_>) -> ResponseWrapper<File> {
-    retrieve_inner(&id_ext.get_fname().to_string()).await
+    retrieve_inner(id_ext.get_fname()).await
 }
 
 pub async fn retrieve_inner(id: &str) -> ResponseWrapper<File> {
-    let filepath = Path::new(&get_upload_dir()).join(id.to_string());
+    let filepath = Path::new(&get_upload_dir()).join(id);
 
     let modified_date =
         match std::fs::metadata(&filepath).and_then(|m| m.modified()) {

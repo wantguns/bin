@@ -31,7 +31,7 @@ pub async fn pretter_retrieve_inner(
     id: &str,
     ext: &str,
 ) -> ResponseWrapper<Template> {
-    let filepath = Path::new(&get_upload_dir()).join(id.to_string());
+    let filepath = Path::new(&get_upload_dir()).join(id);
 
     let modified_date =
         match fs::metadata(&filepath).and_then(|m| m.modified()) {
