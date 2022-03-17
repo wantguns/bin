@@ -22,9 +22,28 @@ const onInput = () => {
 textarea.addEventListener('input', onInput);
 onInput();
 
+const indent = (spaces = 4) => {
+    let cursorPosition = textarea.selectionStart;
+    const before = textarea.value.substring(0, cursorPosition);
+    const after = textarea.value.substring(cursorPosition, textarea.value.length);
+
+    // add 4 spaces
+    textarea.value = before + ' '.repeat(spaces) + after;
+    cursorPosition += spaces;
+
+    // place the cursor accordingly
+    textarea.selectionStart = cursorPosition;
+    textarea.selectionEnd = cursorPosition;
+    textarea.focus();
+}
+
 document.body.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.ctrlKey) {
         form.submit();
+    }
+    if (e.key === 'Tab' && !e.ctrlKey) {
+        preventDefaults(e);
+        indent();
     }
 });
 
