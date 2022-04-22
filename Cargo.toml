@@ -1,6 +1,6 @@
 [package]
 name = "bin"
-version = "2.2.0"
+version = "2.2.1"
 authors = ["Gunwant Jain <mail@wantguns.dev>"]
 edition = "2021"
 build = "build.rs"
