@@ -41,3 +41,10 @@ span {
 .rootBox {
   position: relative;
 }
+
+@media (max-width: 80rem) {
+	#pasteContent {
+        margin-top: 70px
+	}
+}
+
