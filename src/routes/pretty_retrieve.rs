@@ -14,7 +14,7 @@ use crate::models::response_wrapper::ResponseWrapper;
 
 #[get("/p/<id>", rank = 2)]
 pub async fn pretty_retrieve(id: PasteId<'_>) -> ResponseWrapper<Template> {
-    pretter_retrieve_inner(&id.to_string(), "txt").await
+    pretty_retrieve_inner(&id.to_string(), "txt").await
 }
 
 #[get("/p/<id_ext>", rank = 1)]
@@ -24,10 +24,10 @@ pub async fn pretty_retrieve_ext(
     let id = id_ext.get_fname();
     let ext = id_ext.get_ext();
 
-    pretter_retrieve_inner(id, ext).await
+    pretty_retrieve_inner(id, ext).await
 }
 
-pub async fn pretter_retrieve_inner(
+pub async fn pretty_retrieve_inner(
     id: &str,
     ext: &str,
 ) -> ResponseWrapper<Template> {
