@@ -9,7 +9,7 @@
 bin(3)                                BIN                               bin(3)
 
 NAME
-       bin - A highly opinionated and minamalistic Pastebin
+       bin - A highly opinionated and minimalistic Pastebin
 
 ROUTES
        GET /<id>

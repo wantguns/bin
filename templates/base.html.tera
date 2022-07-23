@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="Description" content="Author: Gunwant Jain,
-    A highly opinionated and minamalistic Pastebin." />
+    A highly opinionated and minimalistic Pastebin." />
 
   <link rel="apple-touch-icon" href="/static/media/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/static/media/android-chrome-192x192.png" />
