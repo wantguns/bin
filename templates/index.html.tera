@@ -28,6 +28,10 @@ WEB USAGE
        Paste an image from your clipboard using Ctrl + v, or
        After typing, press the big yellow button to paste, or
        Just press Ctrl + Enter once done typing.
+
+MOBILE USAGE
+       All of the above, or
+       Use the upload button.
 {% if client_desc %}
 CLI USAGE
        Client available at /client
