@@ -1,7 +1,8 @@
 const body = document.querySelector('body');
 const form = document.querySelector('form');
 const grid_form = document.querySelector('.grid_form');
-const fileInput = document.querySelector('.fileUpload');
+const fileUpload = document.querySelector('.fileUpload');
+const fileInput = document.querySelector('input#file-upload');
 const upload_card = document.querySelector('#upload_card');
 const textarea = document.querySelector('textarea');
 const select = document.querySelector('select');
@@ -19,7 +20,7 @@ window.onload = () => {
 const onInput = () => {
     submitButton.classList.toggle('hidden', !textarea.value);
     select.classList.toggle('hidden', !textarea.value);
-    fileInput.classList.toggle('hidden', textarea.value);
+    fileUpload.classList.toggle('hidden', textarea.value);
 }
 textarea.addEventListener('input', onInput);
 onInput();
@@ -93,6 +94,19 @@ function unhighlight(e) {
     grid_form.classList.remove('hidden');
 }
 
+function upload(file) {
+    const ext = file.name.split(".")[1];
+    var url = window.location.href;
+
+    return postData(url, file)
+        .then(data => {
+            window.location.href = data + (ext ? "." + ext : '');
+        })
+        .catch(function (err) {
+            console.info(err + " url: " + url);
+        });
+}
+
 // Files are dropped
 function dropHandler(ev) {
     ev.preventDefault();
@@ -104,21 +118,13 @@ function dropHandler(ev) {
     if (ev.dataTransfer.items) {
         var item = ev.dataTransfer.items[0];
         var blob = item.getAsFile();
-        const ext = blob.name.split(".")[1];
-        var url = window.location.href;
 
-        postData(url, blob)
-            .then(data => {
-                window.location.href = data + "." + ext;
-
-                // remove the jazz for if user returns to the prev page
-                upload_card.classList.remove('show');
-                grid_form.classList.remove('hidden');
-                form.classList.remove('highlight');
-            })
-            .catch(function (err) {
-                console.info(err + " url: " + url);
-            });
+        upload(blob).then(() => {
+            // remove the jazz for if user returns to the prev page
+            upload_card.classList.remove('show');
+            grid_form.classList.remove('hidden');
+            form.classList.remove('highlight');
+        });
     }
 }
 
@@ -129,14 +135,15 @@ document.onpaste = function (pasteEvent) {
     var blob = item.getAsFile();
 
     if (blob !== null && blob !== '') {
-        var url = window.location.href;
+        upload(blob);
+    }
+}
 
-        postData(url, blob)
-            .then(data => {
-                window.location.href = data;
-            })
-            .catch(function (err) {
-                console.info(err + " url: " + url);
-            });
+// upload from the button
+fileInput.onchange = function (e) {
+    const file = e.target.files[0];
+
+    if (file) {
+        upload(file);
     }
 }
