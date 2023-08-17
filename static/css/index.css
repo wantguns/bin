@@ -42,6 +42,24 @@ form.highlight {
     grid-row: 1/2;
 }
 
+.fileUpload {
+    margin-bottom: 1.5em;
+}
+.fileUpload label {
+    color: #83837b;
+    border: 1px solid #83837b;
+    border-radius: .3em;
+    padding: 1em;
+    display: block;
+    text-align: center;
+}
+
+@media (min-width: 992px) {
+    .fileUpload {
+        display: none;
+    }
+}
+
 textarea {
     height: 90%;
     width: 100%;

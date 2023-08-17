@@ -4,6 +4,10 @@
 <form action="/submit" method="post" ondrop="dropHandler(event)">
     <div class="grid_form">
         <div class="textareaBox">
+            <div class="fileUpload">
+                <input type="file" name="file-upload" id="file-upload" hidden />
+                <label for="file-upload">Upload a file</label>
+            </div>
             <textarea name="content" id="textarea_content" style="resize: none" placeholder="
 
 bin(3)                                BIN                               bin(3)
