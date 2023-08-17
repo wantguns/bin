@@ -19,7 +19,7 @@ pub async fn submit(paste: Form<PasteIdForm>) -> Redirect {
     let content = &paste.content;
     let ext = &paste.ext;
 
-    fs::write(&filepath, content).expect("Unable to write to the file");
+    fs::write(filepath, content).expect("Unable to write to the file");
 
     Redirect::to(format!("/p/{id}.{ext}", id = id, ext = ext))
 }
