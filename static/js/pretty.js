@@ -31,3 +31,7 @@ function forkClicked() {
 function newPasteClicked() {
     window.location = homePage;
 }
+
+function rawClicked() {
+    window.location = window.location.href.replace('/p/', '/');
+}
