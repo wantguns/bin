@@ -34,6 +34,13 @@ form.highlight {
     grid-row: 1/3;
 }
 
+.filterSelect {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    height: 2em;
+}
+
 .selectBox {
     grid-row: 2/3;
 }
