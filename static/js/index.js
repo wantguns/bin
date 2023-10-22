@@ -7,6 +7,7 @@ const upload_card = document.querySelector('#upload_card');
 const textarea = document.querySelector('textarea');
 const select = document.querySelector('select');
 const submitButton = document.querySelector('button[type="submit"]');
+const filterSelectInput = document.querySelector('.filterSelect');
 
 window.onload = () => {
     if (localStorage["forkText"] !== null) {
@@ -20,6 +21,7 @@ window.onload = () => {
 const onInput = () => {
     submitButton.classList.toggle('hidden', !textarea.value);
     select.classList.toggle('hidden', !textarea.value);
+    filterSelectInput.classList.toggle('hidden', !textarea.value);
     fileUpload.classList.toggle('hidden', textarea.value);
 }
 textarea.addEventListener('input', onInput);
@@ -39,6 +41,23 @@ const indent = (spaces = 4) => {
     textarea.selectionEnd = cursorPosition;
     textarea.focus();
 }
+
+// add an event listener to any key pressed on the filter field
+filterSelectInput.addEventListener("keyup", (e) => {
+    const text = e.target.value;
+    for( let option of select.options ) {
+        // lowercase comparison for case-insensitivity
+        const lowerOptionText = option.text.toLowerCase();
+        const lowerText = text.toLowerCase(); 
+        const regex = new RegExp("^" + text, "i");
+        const match = option.text.match(regex); 
+        const contains = lowerOptionText.indexOf(lowerText) != -1;
+
+        // enabled / disbaled option matched to text
+        option.disabled = match || contains ? false: true;
+        option.hidden = option.disabled;
+    }
+});
 
 document.body.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && e.ctrlKey) {
