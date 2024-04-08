@@ -171,7 +171,7 @@ the essential arguments, you can also use environment variables, which have the
 highest preference in order.
 
 Everything from the [official Rocket
-doc](https://rocket.rs/v0.5-rc/guide/configuration/#overview) is supported,
+doc](https://rocket.rs/v0.5/guide/configuration/#overview) is supported,
 just that you have to prefix the env variable with "BIN_":
 ```txt
 BIN_PORT=6163
