@@ -41,6 +41,7 @@ SEE ALSO
 " autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
         </div>
         <div class="selectBox">
+            <input class="filterSelect" placeholder="Filter list..."/>
             <select id="ext" name="ext" size="15">
                 <option selected value="txt">Plain Text</option>
                 <option value=".env">DotENV</option>
